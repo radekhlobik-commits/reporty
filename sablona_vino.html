@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Prodej vína kolektiv</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--bg:#f6f4f2;--card:#fff;--tx:#1f1b1c;--mu:#6d6466;--ln:#e6e0df;--ac:#7a1f3d;--ok:#2d6a3e;--bad:#b3261e;
+--r0:#7a1f3d;--r1:#3d5a80;--r2:#a8701a;--r3:#55702a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171415;--card:#221e1f;--tx:#f0ebeb;--mu:#a69c9e;--ln:#3a3335;--ac:#e07a9b;--ok:#7cc59a;--bad:#f2867d;--r0:#e07a9b;--r1:#7fa6d6;--r2:#e3ae55;--r3:#a5c46a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171415;--card:#221e1f;--tx:#f0ebeb;--mu:#a69c9e;--ln:#3a3335;--ac:#e07a9b;--ok:#7cc59a;--bad:#f2867d;--r0:#e07a9b;--r1:#7fa6d6;--r2:#e3ae55;--r3:#a5c46a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.w{max-width:1200px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:24px;margin:0;text-wrap:balance}h2{font-size:15px;margin:0 0 4px}
+.sub{color:var(--mu);font-size:13px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:space-between;margin-bottom:16px}
+.f{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,input[type=search]{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:7px 9px;font:inherit}
+button{font:inherit;cursor:pointer;border-radius:8px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.seg button{background:var(--card);color:var(--tx);border:1px solid var(--ln);padding:6px 12px;display:flex;align-items:center;gap:7px}
+.seg button[aria-pressed=true]{border-color:var(--ac);box-shadow:inset 0 0 0 1px var(--ac);font-weight:600}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.pbtn{background:var(--ac);color:#fff;border:0;padding:8px 14px;font-weight:600}
+:root[data-theme="dark"] .pbtn{color:#1a1213}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pbtn{color:#1a1213}}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:16px;min-width:0}
+.k .l{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.04em}
+.k .v{font-size:26px;font-weight:650;font-variant-numeric:tabular-nums;margin-top:4px;line-height:1.15;overflow-wrap:anywhere}
+.k .d{font-size:13px;margin-top:4px;color:var(--mu)}
+.up{color:var(--ok)}.down{color:var(--bad)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px;margin-bottom:12px}
+.chart{position:relative;min-height:260px}
+.tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:6px 9px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.12);white-space:nowrap;z-index:2}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,.tl{text-align:left}
+th{font-size:12px;color:var(--mu);font-weight:600;position:sticky;top:0;background:var(--card)}
+th button{background:none;border:0;color:inherit;font:inherit;padding:0}
+td.nm{white-space:normal;min-width:160px}
+.items{max-height:560px;overflow:auto}
+.bar{height:6px;border-radius:3px;background:var(--ac);opacity:.75;margin-top:3px}
+.note{font-size:12px;color:var(--mu);margin-top:8px}
+.pill{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid var(--ln);color:var(--mu);margin-left:6px;white-space:nowrap}
+.hd{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#exp{margin-bottom:16px}
+#exp .opts{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0}
+#exp label{display:flex;gap:6px;align-items:center}
+.ghost{background:none;border:1px solid var(--ln);color:var(--tx);padding:7px 12px}
+#st{font-size:13px;color:var(--mu)}
+/* PDF stránky – vždy světlé */
+#pdfroot{position:absolute;left:-12000px;top:0}
+.pg{width:794px;height:1123px;background:#fff;color:#1f1b1c;padding:48px 52px;font:12px/1.4 "Segoe UI",Roboto,Arial,sans-serif;position:relative;overflow:hidden}
+.pg h3{font-size:20px;margin:0 0 2px;color:#7a1f3d}.pg .s{color:#6d6466;font-size:11px;margin-bottom:16px}
+.pg table{font-size:11px}.pg th{background:#fff;color:#6d6466;position:static}.pg td,.pg th{border-color:#e6e0df;padding:5px 6px}
+.pg .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.pg .kp div{border:1px solid #e6e0df;border-radius:6px;padding:9px}.pg .kp b{display:block;font-size:16px;margin-top:2px}
+.pg .kp span{font-size:10px;color:#6d6466;text-transform:uppercase;letter-spacing:.04em}
+.pg h4{font-size:13px;margin:14px 0 6px}
+.pg .ft{position:absolute;left:52px;right:52px;bottom:28px;font-size:10px;color:#8a8183;display:flex;justify-content:space-between}
+@media (prefers-reduced-motion:no-preference){.bars rect{transition:opacity .2s}}
+</style></head><body><div class="w">
+<div class="top"><div><h1>Prodej vína kolektiv</h1><div class="sub">Skupina „víno“ z pokladen · DockHouse, Mazel Vinohrady, Výčep, Karlínská holka, Meatbeer · data k <span id="asof"></span></div></div>
+<div class="f"><label for="mon" class="sub">Měsíc</label><select id="mon"></select><button class="pbtn" id="openexp" type="button">Export do PDF</button></div></div>
+<div id="exp" class="card" hidden>
+<h2>Export do PDF</h2><div class="sub">Vyberte restaurace a měsíc. Za každou restauraci se vytiskne seznam prodaných vín seřazený podle prodaného množství.</div>
+<div class="opts" id="expr"></div>
+<div class="f"><label for="expm" class="sub">Měsíc</label><select id="expm"></select>
+<button class="pbtn" id="dopdf" type="button">Stáhnout PDF</button><button class="ghost" id="closeexp" type="button">Zavřít</button><span id="st" role="status"></span></div>
+</div>
+<div class="seg" id="seg" role="group" aria-label="Restaurace"></div>
+<div class="kpis" id="kpis"></div>
+<div class="grid2">
+<div class="card"><div class="hd"><div><h2>Tržba za víno po měsících</h2><div class="sub" id="chsub"></div></div><div class="f sub" id="leg"></div></div><div class="chart" id="chart"></div><div class="note" id="chnote"></div></div>
+<div class="card"><h2>Srovnání restaurací</h2><div class="sub" id="cmpsub"></div><div class="tw"><table id="cmp"><thead><tr><th>Restaurace</th><th>Víno Kč</th><th>Průměr na den</th><th>Změna m/m</th><th>Dny</th></tr></thead><tbody></tbody></table></div><div class="note">Průměr na den = tržba za víno / počet dní v exportu. Změna m/m porovnává celé měsíce, u neúplného měsíce je jen orientační.</div></div>
+</div>
+<div class="card"><div class="hd"><div><h2>Položky vína</h2><div class="sub" id="itsub"></div></div><input type="search" id="q" placeholder="Hledat víno…" aria-label="Hledat víno"></div>
+<div class="items tw"><table id="it"><thead><tr></tr></thead><tbody></tbody></table></div><div class="note">Množství a jednotky jsou tak, jak je vede pokladna – u rozlévaného vína se většinou počítá v láhvích (sklenka = zlomek láhve), proto Kč / jedn. odpovídá spíš ceně láhve. Ceny vč. DPH.</div></div>
+</div>
+<div id="pdfroot" aria-hidden="true"></div>
+<script>
+const D=/*DATA*/;const ASOF="/*ASOF*/";
+const R=["DockHouse","Mazel Vinohrady","Výčep","Karlínská holka"];
+const COL=R.map((_,i)=>`var(--r${i})`),PCOL=["#7a1f3d","#3d5a80","#a8701a","#55702a"];
+const MN=["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec"];
+const ml=m=>MN[+m.slice(5)-1]+" "+m.slice(0,4), ms=m=>MN[+m.slice(5)-1].slice(0,3)+" "+m.slice(2,4);
+const kc=v=>Math.round(v).toLocaleString("cs-CZ")+" Kč", n1=v=>(Math.round(v*10)/10).toLocaleString("cs-CZ"), pc=v=>(v*100).toLocaleString("cs-CZ",{maximumFractionDigits:1})+" %";
+const M={};D.m.forEach(([r,m,d,v])=>{(M[r]??={})[m]={d,v}});
+const MONTHS=[...new Set(D.m.map(x=>x[1]))].sort();
+const dim=m=>new Date(+m.slice(0,4),+m.slice(5),0).getDate();
+const partial=(r,m)=>M[r]?.[m]&&M[r][m].d<dim(m)-6;
+const prev=m=>{const i=MONTHS.indexOf(m);return i>0?MONTHS[i-1]:null};
+let sel="Vše",mon=MONTHS.filter(m=>!R.some(r=>partial(r,m)&&M[r][m].d<5)).pop()||MONTHS.at(-1),sortK="v",sortD=-1;
+document.getElementById("asof").textContent=ASOF;
+const $=s=>document.querySelector(s);
+const fill=(el,v)=>{el.replaceChildren(...MONTHS.slice().reverse().map(m=>new Option(ml(m),m)));el.value=v};
+fill($("#mon"),mon);fill($("#expm"),mon);
+$("#mon").onchange=e=>{mon=e.target.value;$("#expm").value=mon;draw()};
+const rs=()=>sel==="Vše"?R:[sel];
+const agg=(rr,m)=>rr.reduce((a,r)=>{const x=M[r]?.[m];if(x){a.v+=x.v;a.d=Math.max(a.d,x.d);a.n++}return a},{v:0,d:0,n:0});
+// segment
+$("#seg").replaceChildren(...["Vše",...R].map((r,i)=>{const b=document.createElement("button");b.type="button";
+ if(i){const d=document.createElement("span");d.className="dot";d.style.background=COL[i-1];b.append(d)}b.append(r);
+ b.onclick=()=>{sel=r;draw()};b.dataset.r=r;return b}));
+function draw(){
+ document.querySelectorAll("#seg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.r===sel));
+ const rr=rs(),a=agg(rr,mon),p=prev(mon),b=p?agg(rr.filter(r=>M[r]?.[mon]),p):null;
+ const items=D.i.filter(x=>rr.includes(x[0])&&x[1]===mon);
+ const byName={};items.forEach(x=>{const k=x[2]+"|"+x[3];(byName[k]??={n:x[2],u:x[3],q:0,v:0}).q+=x[4];byName[k].v+=x[5]});
+ const top=Object.values(byName).sort((x,y)=>y.v-x.v)[0];
+ const part=rr.some(r=>partial(r,mon));
+ const ch=b&&b.v?(a.v-b.v)/b.v:null;
+ const K=[["Tržba za víno",a.n?kc(a.v):"—",ml(mon)+(part?" · neúplný měsíc":"")],
+  ["Změna proti "+(p?ml(p):"předchozímu"),ch==null?"—":(ch>0?"+":"")+pc(ch),b&&b.v?"předtím "+kc(b.v):"bez srovnání",ch==null?"":ch>=0?"up":"down"],
+  ["Průměr na den",a.d?kc(a.v/a.d):"—",a.d?"za "+a.d+" dní"+(rr.length>1?" (nejdelší export)":""):""],
+  ["Nejprodávanější víno",top?top.n:"—",top?kc(top.v)+" · "+n1(top.q)+" "+top.u:""]];
+ $("#kpis").replaceChildren(...K.map(([l,v,d,c])=>{const e=document.createElement("div");e.className="card k";
+  e.innerHTML='<div class="l"></div><div class="v"></div><div class="d"></div>';e.children[0].textContent=l;e.children[1].textContent=v;e.children[2].textContent=d;if(c)e.children[1].classList.add(c);
+  if(l.startsWith("Nejprod"))e.children[1].style.fontSize="19px";return e}));
+ chart(rr);cmp();itemsT(items);
+}
+function chart(rr){
+ const el=$("#chart"),W=Math.max(300,el.clientWidth),H=260,ml_=58,mb=34,mt=10,mr=8;
+ const tot=MONTHS.map(m=>rr.reduce((s,r)=>s+(M[r]?.[m]?.v||0),0)),mx=Math.max(...tot)*1.08||1;
+ const bw=(W-ml_-mr)/MONTHS.length,y=v=>H-mb-(v/mx)*(H-mb-mt);
+ const step=[10e3,20e3,50e3,100e3,200e3,250e3,500e3].find(s=>mx/s<=5)||1e6;
+ let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img" aria-label="Tržba za víno po měsících">`;
+ for(let v=0;v<=mx;v+=step)s+=`<line x1="${ml_}" x2="${W-mr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--ln)"/><text x="${ml_-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${v>=1e6?(v/1e6).toLocaleString("cs-CZ")+" mil":v/1e3+" tis"}</text>`;
+ s+='<g class="bars">';
+ MONTHS.forEach((m,i)=>{let acc=0;const x=ml_+i*bw+bw*.18,w=bw*.64;
+  rr.forEach(r=>{const v=M[r]?.[m]?.v||0;if(!v)return;const ri=R.indexOf(r);
+   s+=`<rect x="${x}" y="${y(acc+v)}" width="${w}" height="${Math.max(0,y(acc)-y(acc+v))}" fill="${COL[ri]}" opacity="${m===mon?1:.55}" data-m="${m}"/>`;acc+=v});
+  s+=`<text x="${x+w/2}" y="${H-mb+16}" text-anchor="middle" font-size="11" fill="${m===mon?"var(--tx)":"var(--mu)"}" font-weight="${m===mon?700:400}">${ms(m)}</text>`;
+  if(rr.some(r=>partial(r,m)))s+=`<text x="${x+w/2}" y="${H-mb+29}" text-anchor="middle" font-size="10" fill="var(--mu)">neúplný</text>`;
+  s+=`<rect x="${ml_+i*bw}" y="${mt}" width="${bw}" height="${H-mb-mt}" fill="transparent" data-hit="${m}" style="cursor:pointer"/>`;
+ });
+ s+="</g></svg>";el.innerHTML=s+'<div class="tip" hidden></div>';
+ const tip=el.querySelector(".tip");
+ el.querySelectorAll("[data-hit]").forEach(h=>{const m=h.dataset.hit;
+  h.onmousemove=e=>{const lines=rr.filter(r=>M[r]?.[m]).map(r=>`<div><span class="dot" style="background:${COL[R.indexOf(r)]}"></span> ${r}: <b>${kc(M[r][m].v)}</b></div>`);
+   tip.innerHTML=`<div style="color:var(--mu)">${ml(m)}</div>`+(lines.join("")||"bez dat")+(rr.length>1?`<div>Celkem: <b>${kc(tot[MONTHS.indexOf(m)])}</b></div>`:"");tip.hidden=false;
+   const bx=el.getBoundingClientRect();let lx=e.clientX-bx.left+12;if(lx+tip.offsetWidth>bx.width)lx=e.clientX-bx.left-tip.offsetWidth-12;tip.style.left=Math.max(0,lx)+"px";tip.style.top=(e.clientY-bx.top-10)+"px"};
+  h.onmouseleave=()=>tip.hidden=true;h.onclick=()=>{mon=m;$("#mon").value=m;$("#expm").value=m;draw()}});
+ $("#leg").replaceChildren(...rr.map(r=>{const s=document.createElement("span");s.style.cssText="display:flex;gap:5px;align-items:center";s.innerHTML=`<span class="dot" style="background:${COL[R.indexOf(r)]}"></span>`;s.append(r);return s}));
+ $("#chsub").textContent=(rr.length>1?"Všechny restaurace, skládaně":rr[0])+" · klikněte na měsíc pro detail";
+ $("#chnote").textContent="Neúplný měsíc = export obsahuje jen část dnů (např. listopad zatím 1–2 dny).";
+}
+function cmp(){
+ const p=prev(mon);$("#cmpsub").textContent=ml(mon);
+ const tb=$("#cmp tbody");tb.replaceChildren(...R.map((r,i)=>{const x=M[r]?.[mon],y=p&&M[r]?.[p];const tr=document.createElement("tr");
+  const c=x&&y&&y.v?(x.v-y.v)/y.v:null;
+  tr.innerHTML=`<td><span class="dot" style="background:${COL[i]}"></span> </td><td>${x?kc(x.v):"—"}</td><td>${x&&x.d?kc(x.v/x.d):"—"}</td><td class="${c==null?"":c>=0?"up":"down"}">${c==null?"—":(c>0?"+":"")+pc(c)}</td><td>${x?x.d+(partial(r,mon)?' <span class="pill">neúplný</span>':""):"—"}</td>`;
+  tr.firstChild.append(r);tr.style.cursor="pointer";tr.onclick=()=>{sel=r;draw()};if(sel===r)tr.style.fontWeight=600;return tr}));
+ const a=agg(R,mon);const tr=document.createElement("tr");tr.style.fontWeight=700;tr.innerHTML=`<td>Celkem</td><td>${kc(a.v)}</td><td></td><td></td><td></td>`;tb.append(tr);
+}
+function itemsT(items){
+ const all=rs().length>1,q=$("#q").value.trim().toLowerCase();
+ const tot=items.reduce((s,x)=>s+x[5],0);
+ let rows=items.filter(x=>!q||x[2].toLowerCase().includes(q)).map(x=>({r:x[0],n:x[2],u:x[3],q:x[4],v:x[5],c:x[4]?x[5]/x[4]:0}));
+ rows.sort((a,b)=>typeof a[sortK]==="string"?sortD*a[sortK].localeCompare(b[sortK],"cs"):sortD*(a[sortK]-b[sortK]));
+ const cols=[["n","Víno"],...(all?[["r","Restaurace"]]:[]),["q","Množství"],["u","Jedn."],["c","Kč / jedn."],["v","Tržba"],["s","Podíl"]];
+ $("#it thead tr").replaceChildren(...cols.map(([k,l],i)=>{const th=document.createElement("th");if(k==="u"||k==="r")th.className="tl";
+  if(k!=="s"){const b=document.createElement("button");b.type="button";b.textContent=l+(sortK===k?(sortD>0?" ▲":" ▼"):"");b.onclick=()=>{sortD=sortK===k?-sortD:(typeof rows[0]?.[k]==="string"?1:-1);sortK=k;itemsT(items)};th.append(b);th.setAttribute("aria-sort",sortK===k?(sortD>0?"ascending":"descending"):"none")}else th.textContent=l;return th}));
+ const mx=Math.max(...rows.map(r=>r.v),1);
+ $("#it tbody").replaceChildren(...rows.map(r=>{const tr=document.createElement("tr");
+  const td=(t,c)=>{const e=document.createElement("td");e.textContent=t;if(c)e.className=c;tr.append(e);return e};
+  const nm=td(r.n,"nm");const bar=document.createElement("div");bar.className="bar";bar.style.width=(r.v/mx*100)+"%";bar.style.background=COL[R.indexOf(r.r)];nm.append(bar);
+  if(all)td(r.r,"tl");td(n1(r.q));td(r.u,"tl");td(r.c?kc(r.c):"—");td(kc(r.v));td(tot?pc(r.v/tot):"—");return tr}));
+ $("#itsub").textContent=`${ml(mon)} · ${rows.length} položek · celkem ${kc(tot)}`;
+}
+$("#q").oninput=()=>draw();
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(draw,150)});
+draw();
+// ---------- Export PDF ----------
+$("#expr").replaceChildren(...R.map((r,i)=>{const l=document.createElement("label");const c=document.createElement("input");c.type="checkbox";c.value=r;c.checked=true;c.id="ex"+i;
+ const d=document.createElement("span");d.className="dot";d.style.background=COL[i];l.append(c,d,r);return l}));
+$("#openexp").onclick=()=>{$("#exp").hidden=false;$("#expm").value=mon;$("#st").textContent=""};
+$("#closeexp").onclick=()=>$("#exp").hidden=true;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function pages(sel,m){
+ const out=[],stamp=`Vygenerováno ${new Date().toLocaleDateString("cs-CZ")} · data k ${ASOF}`;
+ const head=(t,s)=>`<h3>${esc(t)}</h3><div class="s">${esc(s)}</div>`;
+ const TH=`<tr><th>#</th><th style="text-align:left">Víno</th><th>Prodáno</th><th style="text-align:left">Jedn.</th><th>Tržba</th></tr>`;
+ const row=(z,i)=>`<tr><td>${i+1}</td><td style="text-align:left;white-space:normal">${esc(z[2])}</td><td><b>${n1(z[4])}</b></td><td style="text-align:left">${esc(z[3])}</td><td>${kc(z[5])}</td></tr>`;
+ sel.forEach(r=>{const x=M[r]?.[m];
+  const it=D.i.filter(z=>z[0]===r&&z[1]===m).sort((a,b)=>b[4]-a[4]||b[5]-a[5]);
+  const sub=ml(m)+(x?` · ${x.d} dní v exportu`+(partial(r,m)?" (neúplný měsíc)":""):"")+` · ${it.length} vín · řazeno podle prodaného množství`;
+  if(!it.length){out.push({h:head(r+" – prodaná vína",ml(m))+`<p>Za tento měsíc nejsou data.</p>`,stamp});return}
+  const per=34;
+  for(let i=0;i<it.length;i+=per)out.push({h:head(r+" – prodaná vína"+(i?" (pokračování)":""),sub)+`<table>${TH}`+it.slice(i,i+per).map((z,k)=>row(z,i+k)).join("")+"</table>",stamp});
+ });
+ return out;
+}
+$("#dopdf").onclick=async()=>{
+ const sel=[...document.querySelectorAll("#expr input:checked")].map(c=>c.value),m=$("#expm").value,st=$("#st");
+ if(!sel.length){st.textContent="Vyberte aspoň jednu restauraci.";return}
+ if(!window.jspdf||!window.html2canvas){st.textContent="Knihovny pro PDF se nenačetly – zkontrolujte připojení a obnovte stránku.";return}
+ const btn=$("#dopdf");btn.disabled=true;st.textContent="Připravuji PDF…";
+ try{
+  const P=pages(sel,m),root=$("#pdfroot"),pdf=new jspdf.jsPDF({unit:"mm",format:"a4"});
+  for(let k=0;k<P.length;k++){st.textContent=`Stránka ${k+1} z ${P.length}…`;
+   const pg=document.createElement("div");pg.className="pg";pg.innerHTML=P[k].h+`<div class="ft"><span>${P[k].stamp}</span><span>${k+1} / ${P.length}</span></div>`;root.replaceChildren(pg);
+   const cv=await html2canvas(pg,{scale:2,backgroundColor:"#ffffff",logging:false});
+   if(k)pdf.addPage();pdf.addImage(cv.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297)}
+  root.replaceChildren();
+  const fn=`Prodej vina ${m}${sel.length<R.length?" - "+sel.join(", "):""}.pdf`.normalize("NFD").replace(/[̀-ͯ]/g,"");
+  const blob=pdf.output("blob");
+  const dl=window.claude?.use?await window.claude.use("downloads").catch(()=>null):null;
+  if(dl){await dl.save({filename:fn,data:blob})}else{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fn;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000)}
+  st.textContent="PDF připraveno: "+fn;
+ }catch(e){st.textContent=e?.code==="declined"?"Stažení zrušeno.":"PDF se nepodařilo vytvořit: "+(e?.message||e)}
+ finally{btn.disabled=false}
+};
+</script></body></html>

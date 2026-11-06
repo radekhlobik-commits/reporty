@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kredit akcionářů – Spojovna</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#1d2433;--mute:#667085;--line:#e4e7ec;--acc:#1f4e78;--acc2:#2e7d5b;--neg:#c0392b;--pos:#2e7d5b;--chip:#eef3f9}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e7eaf0;--mute:#98a2b3;--line:#2c3340;--acc:#6ea8dc;--acc2:#5cc497;--neg:#ff7b6b;--pos:#5cc497;--chip:#243041}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:16px}
+h1{font-size:22px;margin:0}
+.sub{color:var(--mute);font-size:13px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,input,button,textarea{font:inherit;color:inherit}
+select,input[type=search],input[type=text],textarea{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+button{cursor:pointer;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 12px}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+button.sm{padding:4px 9px;font-size:12.5px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi .l{color:var(--mute);font-size:12.5px}
+.kpi .v{font-size:22px;font-weight:650;font-variant-numeric:tabular-nums;margin-top:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h2{font-size:15px;margin:0 0 10px}
+.neg{color:var(--neg)}.pos{color:var(--pos)}
+.tblwrap{overflow:auto;max-height:min(70vh,640px);border:1px solid var(--line);border-radius:8px}
+tfoot td{position:sticky;bottom:0;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{font-size:12px;color:var(--mute);font-weight:600;cursor:pointer;user-select:none;position:sticky;top:0;background:var(--card)}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+td.nm{font-weight:550}
+td.em{color:var(--mute);font-size:12.5px;text-align:left}
+tr:hover td{background:var(--chip)}
+tfoot td{font-weight:700;border-top:2px solid var(--line)}
+.sent{font-size:11.5px;color:var(--pos);margin-left:4px}
+.legend{display:flex;gap:14px;font-size:12.5px;color:var(--mute);margin-bottom:6px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+dialog{border:none;border-radius:14px;padding:0;max-width:720px;width:calc(100% - 32px);background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,14,20,.5)}
+.dh{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.db{padding:14px 18px;max-height:62vh;overflow:auto}
+.df{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.sum div{background:var(--chip);border-radius:10px;padding:8px 10px}
+.sum b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.sum span{font-size:12px;color:var(--mute)}
+.note{font-size:12.5px;color:var(--mute)}
+label.f{display:block;font-size:12.5px;color:var(--mute);margin:8px 0 3px}
+textarea,input.full{width:100%}
+.prog{height:8px;background:var(--chip);border-radius:6px;overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:var(--acc2);width:0}
+@media (max-width:640px){.sum{grid-template-columns:repeat(2,1fr)} td.em,th.em{display:none}}
+@media print{body{background:#fff}.tblwrap{max-height:none;overflow:visible;border:0}tfoot td{position:static}header .ctrl,.noprint{display:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Kredit akcionářů – měsíční report</h1>
+    <div class="sub">Pivovar Spojovna a.s. · peněženka Akcionáři · data do <span id="to"></span></div>
+  </div>
+  <div class="ctrl">
+    <label for="mon" class="sub">Měsíc</label>
+    <select id="mon"></select>
+    <button class="pri" id="bulk">Poslat e-mailem všem…</button>
+    <button id="setb">Nastavení e-mailu</button>
+  </div>
+</header>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="card">
+  <h2>Vývoj po měsících (všichni akcionáři)</h2>
+  <div class="legend"><span><i class="sw" style="background:var(--acc2)"></i>Dobití</span><span><i class="sw" style="background:var(--neg)"></i>Čerpání</span><span><i class="sw" style="background:var(--acc)"></i>Konečný stav</span></div>
+  <div id="chart"></div>
+</div>
+
+<div class="card">
+  <div class="ctrl" style="justify-content:space-between;margin-bottom:10px">
+    <h2 style="margin:0">Akcionáři – <span id="mlab"></span></h2>
+    <div class="ctrl">
+      <input type="search" id="q" placeholder="Hledat jméno nebo e-mail">
+      <select id="flt">
+        <option value="all">Všichni</option>
+        <option value="act">S pohybem v měsíci</option>
+        <option value="neg">Záporný konečný stav</option>
+        <option value="pos">Kladný konečný stav</option>
+      </select>
+      <button id="csv">Export CSV</button>
+    </div>
+  </div>
+  <div class="tblwrap"><table id="tbl">
+    <thead><tr>
+      <th data-k="n" class="l">Akcionář</th><th data-k="e" class="l em">E-mail</th>
+      <th data-k="0">Počáteční stav</th><th data-k="1">Dobití</th><th data-k="2">Čerpání</th><th data-k="3">Konečný stav</th>
+      <th class="noprint" style="cursor:default"></th>
+    </tr></thead>
+    <tbody></tbody><tfoot></tfoot>
+  </table></div>
+  <p class="note" style="text-align:center">Zdroj: Data z Vašeho pokladního systému FoodMan a věrnostního systému Loyalman</p>
+</div>
+</div>
+
+<dialog id="dlg">
+  <div class="dh"><div><div style="font-size:17px;font-weight:650" id="dn"></div><div class="sub" id="de"></div></div><button class="sm" onclick="dlg.close()">Zavřít</button></div>
+  <div class="db" id="db"></div>
+  <div class="df"><button onclick="window.print()" class="noprint">Tisk</button><button class="pri" id="dsend">Poslat e-mailem</button></div>
+</dialog>
+
+<dialog id="bdlg">
+  <div class="dh"><div><div style="font-size:17px;font-weight:650">Hromadné odeslání – <span id="bm"></span></div><div class="sub">Pro každého akcionáře se otevře předvyplněný e-mail ve vašem poštovním programu. Vy ho jen odešlete a pokračujete dalším.</div></div><button class="sm" onclick="bdlg.close()">Zavřít</button></div>
+  <div class="db">
+    <label class="f"><input type="checkbox" id="bact" checked> Jen akcionáři s pohybem v měsíci</label>
+    <div class="prog"><i id="bp"></i></div>
+    <div id="bs" class="sub"></div>
+    <div id="bnext" style="margin-top:10px;font-size:15px"></div>
+  </div>
+  <div class="df"><button id="breset">Vynulovat označení „odesláno“</button><button id="bcsv">CSV pro hromadnou korespondenci</button><button class="pri" id="bgo">Otevřít další e-mail</button></div>
+</dialog>
+
+<dialog id="sdlg">
+  <div class="dh"><div style="font-size:17px;font-weight:650">Nastavení e-mailu</div><button class="sm" onclick="sdlg.close()">Zavřít</button></div>
+  <div class="db">
+    <label class="f">Předmět ({mesic} = měsíc)</label><input type="text" class="full" id="ssub">
+    <label class="f">Úvodní text ({jmeno}, {mesic})</label><textarea id="sint" rows="3"></textarea>
+    <label class="f">Podpis</label><textarea id="ssig" rows="3"></textarea>
+    <label class="f">Kopie (BCC) – nepovinné</label><input type="text" class="full" id="sbcc" placeholder="např. ucetni@spojovna.cz">
+  </div>
+  <div class="df"><button class="pri" id="ssave">Uložit</button></div>
+</dialog>
+
+<script>
+const D=/*DATA*/;
+const MN=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+const ml=m=>MN[+m.slice(5)-1]+' '+m.slice(0,4);
+const fmt=v=>(v<0?'−':'')+Math.abs(v).toLocaleString('cs-CZ')+' Kč';
+const fmtN=v=>(v<0?'−':'')+Math.abs(v).toLocaleString('cs-CZ');
+const cls=v=>v<0?'neg':'';
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const DEF={sub:'Výpis kreditu akcionáře – {mesic}',int:'Dobrý den, {jmeno},\n\nzasíláme výpis Vašeho akcionářského kreditu v Pivovaru Spojovna za {mesic}.',sig:'S pozdravem\nPivovar Spojovna a.s.',bcc:''};
+let S=Object.assign({},DEF,store.get('spoj_set',{}));
+const realMail=e=>e&&!/@import\.cz$/i.test(e);
+const sentKey=m=>'spoj_sent_'+m;
+let sent={};
+const $=id=>document.getElementById(id);
+$('to').textContent=D.to;
+const sel=$('mon');
+D.months.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=ml(m)+(m===D.months[D.months.length-1]?' (neúplný)':'');sel.appendChild(o)});
+sel.value=store.get('spoj_mon',D.months[D.months.length-1]);if(!D.months.includes(sel.value))sel.value=D.months[D.months.length-1];
+let sortK='n',sortD=1,cur=null;
+
+function rows(){const m=sel.value,q=$('q').value.trim().toLowerCase(),f=$('flt').value;
+  let r=D.p.filter(p=>{const x=p.m[m];if(q&&!(p.n.toLowerCase().includes(q)||p.e.toLowerCase().includes(q)))return false;
+    if(f==='act')return x[4].length>0;if(f==='neg')return x[3]<0;if(f==='pos')return x[3]>0;return true});
+  r.sort((a,b)=>{let va,vb;if(sortK==='n'||sortK==='e'){va=a[sortK].toLowerCase();vb=b[sortK].toLowerCase();return va<vb?-sortD:va>vb?sortD:0}
+    va=a.m[m][+sortK];vb=b.m[m][+sortK];return (va-vb)*sortD});return r}
+
+function render(){const m=sel.value;store.set('spoj_mon',m);sent=store.get(sentKey(m),{});
+  $('mlab').textContent=ml(m);
+  const all=D.p.map(p=>p.m[m]);const T=[0,1,2,3].map(i=>all.reduce((s,x)=>s+x[i],0));
+  const act=all.filter(x=>x[4].length).length;
+  $('kpis').innerHTML=[['Počáteční stav',T[0]],['Dobití',T[1]],['Čerpání',T[2]],['Konečný stav',T[3]]].map(([l,v])=>`<div class="kpi"><div class="l">${l}</div><div class="v ${cls(v)}">${fmt(v)}</div></div>`).join('')+
+    `<div class="kpi"><div class="l">Aktivní akcionáři</div><div class="v">${act} <span class="sub">/ ${D.p.length}</span></div></div>`;
+  const r=rows();const tb=$('tbl').tBodies[0];
+  tb.innerHTML=r.map((p,i)=>{const x=p.m[m];const ok=realMail(p.e);
+    return `<tr><td class="nm l">${esc(p.n)}</td><td class="em">${ok?esc(p.e):'<i>bez e-mailu</i>'}</td>
+    <td class="${cls(x[0])}">${fmtN(x[0])}</td><td>${fmtN(x[1])}</td><td class="${cls(x[2])}">${fmtN(x[2])}</td><td class="${cls(x[3])}"><b>${fmtN(x[3])}</b></td>
+    <td class="noprint"><button class="sm" data-d="${p.e}">Detail</button> <button class="sm pri" data-s="${p.e}" ${ok?'':'disabled'}>Poslat e-mailem</button>${sent[p.e]?'<span class="sent">✓ odesláno</span>':''}</td></tr>`}).join('');
+  const RT=[0,1,2,3].map(i=>r.reduce((s,p)=>s+p.m[m][i],0));
+  $('tbl').tFoot.innerHTML=`<tr><td class="l">Celkem (${r.length})</td><td class="em"></td>${RT.map(v=>`<td class="${cls(v)}">${fmtN(v)}</td>`).join('')}<td class="noprint"></td></tr>`;
+  document.querySelectorAll('th[data-k]').forEach(th=>{th.textContent=th.textContent.replace(/ [▲▼]$/,'');if(th.dataset.k===sortK)th.textContent+=sortD>0?' ▲':' ▼'});
+  chart();}
+
+function chart(){const ms=D.months;const agg=ms.map(m=>{const a=D.p.map(p=>p.m[m]);return [0,1,2,3].map(i=>a.reduce((s,x)=>s+x[i],0))});
+  const W=Math.max(320,$('chart').clientWidth||800),H=220,pl=70,pr=10,pt=10,pb=28;
+  const vals=agg.flatMap(a=>[a[1],a[2],a[3]]);const mx=Math.max(...vals,0),mn=Math.min(...vals,0);
+  const y=v=>pt+(mx-v)/(mx-mn)*(H-pt-pb);const gw=(W-pl-pr)/ms.length,bw=Math.min(26,gw/4);
+  let s=`<svg width="100%" viewBox="0 0 ${W} ${H}" role="img" aria-label="Dobití, čerpání a konečný stav po měsících">`;
+  const step=niceStep((mx-mn)/4);for(let v=Math.ceil(mn/step)*step;v<=mx;v+=step){s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${(v/1000).toLocaleString('cs-CZ')} tis.</text>`}
+  s+=`<line x1="${pl}" x2="${W-pr}" y1="${y(0)}" y2="${y(0)}" stroke="var(--mute)"/>`;
+  ms.forEach((m,i)=>{const cx=pl+gw*i+gw/2;[[1,'var(--acc2)'],[2,'var(--neg)'],[3,'var(--acc)']].forEach(([k,c],j)=>{const v=agg[i][k],x=cx+(j-1.5)*bw+1,y0=y(Math.max(v,0)),h=Math.abs(y(v)-y(0));
+    s+=`<rect x="${x}" y="${y0}" width="${bw-2}" height="${Math.max(h,1)}" rx="2" fill="${c}" opacity="${m===sel.value?1:.55}"><title>${ml(m)}: ${['','Dobití','Čerpání','Konečný stav'][k]} ${fmt(v)}</title></rect>`});
+    s+=`<text x="${cx}" y="${H-8}" text-anchor="middle" font-size="12" fill="var(--ink)" font-weight="${m===sel.value?700:400}">${MN[+m.slice(5)-1]}</text>`});
+  $('chart').innerHTML=s+'</svg>'}
+function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r)));for(const k of[1,2,2.5,5,10])if(k*p>=r)return k*p;return 10*p}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const byE=e=>D.p.find(p=>p.e===e);
+const firstName=n=>{const a=n.split(' ');return a.length>1?a.slice(1).join(' ')+' '+a[0]:n};
+
+function detail(p){cur=p;const m=sel.value,x=p.m[m];
+  $('dn').textContent=firstName(p.n);$('de').textContent=(realMail(p.e)?p.e:'bez e-mailu')+' · '+ml(m);
+  $('db').innerHTML=`<div class="sum"><div><span>Počáteční stav</span><b class="${cls(x[0])}">${fmt(x[0])}</b></div><div><span>Dobití</span><b>${fmt(x[1])}</b></div><div><span>Čerpání</span><b class="${cls(x[2])}">${fmt(x[2])}</b></div><div><span>Konečný stav</span><b class="${cls(x[3])}">${fmt(x[3])}</b></div></div>`+
+   (x[4].length?`<table><thead><tr><th class="l">Datum</th><th class="l">Pohyb</th><th class="l">Pokladna</th><th>Částka</th><th>Zůstatek</th></tr></thead><tbody>`+
+   (()=>{let b=x[0];return x[4].map(t=>{b+=t[3];return `<tr><td class="l">${t[0]}</td><td class="l">${t[1]==='D'?'Dobití':t[3]>0?'Storno':'Čerpání'}</td><td class="l">${esc(t[2])}</td><td class="${cls(t[3])}">${fmtN(t[3])}</td><td class="${cls(b)}">${fmtN(b)}</td></tr>`}).join('')})()+`</tbody></table>`:'<p class="note">V tomto měsíci bez pohybu.</p>');
+  $('dsend').disabled=!realMail(p.e);if(!dlg.open)dlg.showModal()}
+
+function bodyFor(p,m){const x=p.m[m],mm=ml(m);let L=[S.int.replace(/\{jmeno\}/g,firstName(p.n)).replace(/\{mesic\}/g,mm),'',
+  'Počáteční stav: '+fmt(x[0]),'Dobití: '+fmt(x[1]),'Čerpání: '+fmt(x[2]),'Konečný stav: '+fmt(x[3]),''];
+  if(x[4].length){L.push('Pohyby:');let b=x[0];const tx=x[4],max=35;
+    tx.slice(0,max).forEach(t=>{b+=t[3];L.push(`${t[0]}  ${t[1]==='D'?'Dobití':t[3]>0?'Storno':'Čerpání'}  ${fmt(t[3])}  (zůstatek ${fmt(b)})`)});
+    if(tx.length>max)L.push(`… a dalších ${tx.length-max} pohybů. Úplný výpis Vám rádi zašleme.`);L.push('')}
+  else L.push('V tomto měsíci nebyly žádné pohyby.','');
+  if(x[3]<0)L.push('Upozorňujeme, že zůstatek kreditu je záporný.','');
+  L.push(S.sig);return L.join('\r\n')}
+function mailto(p,m){const sub=S.sub.replace(/\{mesic\}/g,ml(m));let u='mailto:'+encodeURIComponent(p.e)+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(bodyFor(p,m));if(S.bcc)u+='&bcc='+encodeURIComponent(S.bcc);return u}
+function send(p){const m=sel.value;if(!realMail(p.e))return;window.location.href=mailto(p,m);sent[p.e]=1;store.set(sentKey(m),sent);render()}
+
+$('tbl').addEventListener('click',e=>{const b=e.target.closest('button');if(b){if(b.dataset.d)detail(byE(b.dataset.d));if(b.dataset.s)send(byE(b.dataset.s));return}
+  const th=e.target.closest('th[data-k]');if(th){if(sortK===th.dataset.k)sortD=-sortD;else{sortK=th.dataset.k;sortD=th.dataset.k.length>1||isNaN(th.dataset.k)?1:-1}render()}});
+$('dsend').onclick=()=>{send(cur);detail(cur)};
+['mon','flt'].forEach(i=>$(i).addEventListener('change',render));$('q').addEventListener('input',render);
+window.addEventListener('resize',chart);
+
+// bulk
+const queue=()=>D.p.filter(p=>realMail(p.e)&&(!$('bact').checked||p.m[sel.value][4].length));
+function bulkUI(){const q=queue(),done=q.filter(p=>sent[p.e]).length,next=q.find(p=>!sent[p.e]);
+  $('bm').textContent=ml(sel.value);$('bp').style.width=(q.length?done/q.length*100:0)+'%';
+  $('bs').textContent=`Odesláno ${done} z ${q.length} akcionářů.`;
+  $('bnext').innerHTML=next?`Další: <b>${esc(firstName(next.n))}</b> <span class="sub">${esc(next.e)} · konečný stav ${fmt(next.m[sel.value][3])}</span>`:'<b class="pos">Hotovo – všichni označeni jako odeslaní.</b>';
+  $('bgo').disabled=!next}
+$('bulk').onclick=()=>{sent=store.get(sentKey(sel.value),{});bulkUI();bdlg.showModal()};
+$('bact').onchange=bulkUI;
+$('bgo').onclick=()=>{const n=queue().find(p=>!sent[p.e]);if(n){send(n);bulkUI()}};
+$('breset').onclick=()=>{if(!confirm('Opravdu vynulovat?'))return;sent={};store.set(sentKey(sel.value),sent);render();bulkUI()};
+
+function dl(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+text],{type:'text/csv;charset=utf-8'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+const q2=s=>'"'+String(s).replace(/"/g,'""')+'"';
+$('csv').onclick=()=>{const m=sel.value;dl(`akcionari_${m}.csv`,['Akcionář;E-mail;Počáteční stav;Dobití;Čerpání;Konečný stav'].concat(rows().map(p=>{const x=p.m[m];return [q2(p.n),q2(p.e),x[0],x[1],x[2],x[3]].join(';')})).join('\r\n'))};
+$('bcsv').onclick=()=>{const m=sel.value;dl(`hromadna_korespondence_${m}.csv`,['Jméno;E-mail;Předmět;Počáteční stav;Dobití;Čerpání;Konečný stav;Text'].concat(queue().map(p=>{const x=p.m[m];return [q2(firstName(p.n)),q2(p.e),q2(S.sub.replace(/\{mesic\}/g,ml(m))),x[0],x[1],x[2],x[3],q2(bodyFor(p,m))].join(';')})).join('\r\n'))};
+
+// settings
+$('setb').onclick=()=>{$('ssub').value=S.sub;$('sint').value=S.int;$('ssig').value=S.sig;$('sbcc').value=S.bcc;sdlg.showModal()};
+$('ssave').onclick=()=>{S={sub:$('ssub').value,int:$('sint').value,sig:$('ssig').value,bcc:$('sbcc').value.trim()};store.set('spoj_set',S);sdlg.close()};
+const dlg=$('dlg'),bdlg=$('bdlg'),sdlg=$('sdlg');
+render();
+</script>
+</body>
+</html>

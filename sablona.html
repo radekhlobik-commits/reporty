@@ -1,0 +1,576 @@
+<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>/*TITLE*/</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>#tgi tr.gih td{font-weight:600;cursor:pointer;background:color-mix(in srgb,var(--ac) 7%,transparent)}#tgi tr.gih td:first-child{white-space:nowrap}#tgi tr.gii td:first-child{padding-left:26px}
+:root{--bg:#f6f5f1;--card:#fff;--tx:#1d1d1b;--mu:#6b6a64;--ln:#e4e2da;--k:#c2561b;--b:#1f6f8b;--ac:#2d5a3d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171716;--card:#222220;--tx:#efeee9;--mu:#a09f97;--ln:#35342f;--k:#e8834a;--b:#5ab0cf;--ac:#7cc59a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171716;--card:#222220;--tx:#efeee9;--mu:#a09f97;--ln:#35342f;--k:#e8834a;--b:#5ab0cf;--ac:#7cc59a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1200px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0}h2{font-size:15px;margin:0 0 10px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:space-between;margin-bottom:16px}
+.sub{color:var(--mu);font-size:13px}
+.f{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,input{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:6px 8px;font:inherit}
+.g{display:grid;gap:12px}.k5{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:12px}.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px;min-width:0}
+.kv{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums}.kl{color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+#kpi .kv,#obv .kv,#skpi .kv{white-space:nowrap}#kpi .kv>div{white-space:normal}.kit .kv{color:var(--k)}.bar .kv{color:var(--b)}
+.cv{position:relative;height:260px}
+.sc{overflow-x:auto}.sc.l12{overflow-y:auto;max-height:440px}.sc.l12 td:first-child{white-space:normal;overflow-wrap:anywhere;min-width:110px}.sc.l12 th{position:sticky;top:0;background:var(--card);z-index:1}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}
+th{color:var(--mu);font-size:12px;cursor:pointer;user-select:none}
+.bg{display:inline-block;height:6px;border-radius:3px;background:var(--ac);vertical-align:middle;margin-left:6px}
+.note{color:var(--mu);font-size:12px;margin-top:14px}
+.btn{font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid var(--ln);background:var(--card);color:var(--tx);cursor:pointer}.btn:hover{border-color:var(--ac)}.btn:disabled{opacity:.45;cursor:not-allowed}.btn:disabled:hover{border-color:var(--ln)}
+#vc{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);overflow:auto;padding:16px}
+#vc .doc{background:#fff;color:#111;max-width:980px;margin:0 auto;padding:24px;border-radius:10px;font-size:13px}#vc h1{font-size:20px;margin:0 0 4px}#vc .acts[hidden]{display:none}#vc .acts{display:flex;gap:8px;max-width:980px;margin:0 auto 10px}
+#vc table{width:100%;border-collapse:collapse;margin:8px 0 16px}#vc th,#vc td{border:1px solid #aaa;padding:5px 7px;text-align:right}#vc th:first-child,#vc td:first-child{text-align:left}#vc th{background:#eee}#vc tr.tl td{font-weight:700;background:#f3f3f3}
+#vc .dw{overflow-x:auto}#vc .pdfcap{max-width:none!important;width:max-content!important}#vc .pdfcap .dw{overflow:visible!important}#vc .dw table{font-size:12px}#vc .dw th{white-space:normal;min-width:64px;font-size:11px}#vc .dw td{white-space:nowrap}
+#vc .sg{display:flex;justify-content:space-between;margin-top:48px}#vc .sg div{width:40%;border-top:1px solid #111;padding-top:4px;text-align:center}#vc .mu{color:#555}#vc .gsel{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 16px;margin:12px 0}#vc .gsel label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer}#vc .gsel span{margin-left:auto;color:#555;font-variant-numeric:tabular-nums}#vc .gx{display:flex;gap:8px;margin:6px 0 4px}.cl:not(.open)>:not(.wh),.cl:not(.open) .wct{display:none!important}.cl:not(.open) .wh{margin-bottom:0!important}.cl .wtg{cursor:pointer}.cl .chv{display:inline-block;width:1em;color:var(--mu)}
+@media print{:root:root:root{--bg:#fff;--card:#fff;--tx:#111;--mu:#555;--ln:#ccc}body{background:#fff}.np,.top .f,.btn,select,input,#mo,#mw,#wqb,#vch,#vc .acts{display:none!important}.card,.c{break-inside:avoid;box-shadow:none}.sc{overflow:visible}.sc.l12{max-height:none!important}
+#vc{display:none}body.vcp .w{display:none}body.vcp #vc{display:block;position:static;background:#fff;padding:0;overflow:visible}body.vcp #vc .doc{max-width:none;padding:0;border-radius:0;font-size:11px}body.vcp #vc .dw table{font-size:9px}body.vcp #vc .dw th{font-size:8px;min-width:0}body.vcp #vc th,body.vcp #vc td{padding:3px 4px}.dw{overflow:visible}}
+#vc table.dr tr.ds td{font-weight:700;text-align:left;font-size:13px;padding-top:8px;background:#fff;border-left:0;border-right:0}#vc table.dr tr.de td{border:0;height:10px;padding:0}
+#vc .ps{border-top:1.5px solid #111;padding:6px 0 4px;break-inside:avoid}#vc .ps .ph{display:flex;justify-content:space-between;gap:12px;font-weight:700;font-size:13px}#vc .ps .ph .mu{font-weight:400}
+#vc .ps .pi{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;font-size:10.5px;color:#333;margin-top:3px}#vc .ps .pi div{display:flex;gap:6px;border-bottom:1px dotted #ccc;padding:1px 0}#vc .ps .pi div span:nth-child(2){flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#vc .ps .pi div span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+#vc .pst{display:flex;justify-content:space-between;border-top:2px solid #111;border-bottom:2px solid #111;padding:6px 0;margin-top:10px;font-weight:700;font-size:14px}#vc .psopt{display:flex;gap:8px;align-items:center;margin:10px 0}
+#vc .mrp{margin-bottom:16px}#vc .mrwarn{background:#fdecea;border:1px solid #c0392b;color:#7a1d12;border-radius:8px;padding:8px 10px;margin:8px 0;font-size:13px}#vc .mrh{margin-bottom:10px}#vc .mrt{text-align:center;font-weight:700;font-size:17px;margin-bottom:8px}#vc .mrg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;font-size:12px;border-bottom:1.5px solid #111;padding-bottom:6px;margin-bottom:4px}
+#vc table.mrtb{font-variant-numeric:tabular-nums}#vc table.mrtb.t2 td:nth-child(2),#vc table.mrtb.t2 th:nth-child(2){text-align:left}#vc table.mrtb tr.mrc td{font-weight:700;font-size:15px;background:#f3f3f3;border-top:2px solid #111}#vc table.mrtb tr.mrs td{font-weight:700;background:#fafafa}#vc table.mrtb tr.mrsp td{border:0;height:8px;padding:0}#vc .mrft{font-size:10px;margin-top:8px}
+@media print{body.vcp #vc .mrp{break-after:page;margin:0}body.vcp #vc .mrp:last-child{break-after:auto}body.vcp #vc table.mrtb{font-size:10.5px}}
+@media (max-width:600px){#vc .ps .pi{grid-template-columns:1fr}}@media print{body.vcp #vc .ps .pi{font-size:8.5px}body.vcp #vc .ps .ph{font-size:11px}}
+#ta.zb tr.ar,#ts.zb tr.ar,#ts.zb tr.sd{display:none!important}
+</style></head><body><div class="w">
+<div class="top"><div><h1>/*TITLE*/</h1><div class="sub" id="sub"></div></div>
+<div class="f"><label class="sub" id="mesl" hidden>Měsíc <select id="mes"></select></label><label class="sub">Od <select id="a"></select></label><label class="sub">Do <select id="b"></select></label><button class="btn" id="vcr">Včera</button><button class="btn" id="pdf" title="Otevře tisk – zvolte „Uložit jako PDF“">Uložit do PDF</button><button class="btn" id="drb" hidden title="Tržby po dnech: obědy / večeře, kuchyně / bar – s uložením do Excelu">Generovat report po dnech</button></div></div>
+<div class="g k5" id="kpi"></div>
+<div class="g c2"><div class="card"><h2>Tržba po hodinách</h2><div class="g" id="obv" style="grid-template-columns:1fr 1fr;margin-bottom:10px"></div><div class="cv"><canvas id="ch"></canvas></div></div>
+<div class="card"><div class="f" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">Tržba po střediscích a dnech</h2><button class="btn" id="mrb" hidden title="Tržby po platbách, po sazbách DPH a po dnech – k tisku nebo uložení do PDF">Měsíční reporty</button></div><div class="cv"><canvas id="cd"></canvas></div></div></div>
+<div class="g c2"><div class="card"><div class="f" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">Typ platby</h2><div class="f"><span class="sub" id="vch"></span><button class="btn" id="vcb">Výčetka</button></div></div><div class="sc l12"><table id="tp"></table></div></div>
+<div class="card"><h2>Číšníci</h2><div class="sc l12"><table id="tw"></table></div></div></div>
+<div class="card" id="akc" style="margin-bottom:12px" hidden><div class="f" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" id="akh">Konzumační karty po akcionářích</h2><div class="f"><button class="btn" id="psb" hidden title="Konzumace na kartu úvěrovou po držitelích za zvolené období – k tisku nebo uložení do PDF">Export Personální strava</button><button class="btn" id="akt" aria-expanded="false" title="Rozbalit / zabalit">Rozbalit ▾</button></div></div><div class="sc"><table id="ta" class="zb"></table></div></div>
+<div class="card" style="margin-bottom:12px"><div class="f" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">Stornované účty</h2><div class="f"><select id="ssel"></select><button class="btn" id="swt" aria-expanded="false" title="Rozbalit / zabalit storna po číšnících">Rozbalit ▾</button></div></div><div class="g k5" id="skpi" style="margin-bottom:10px"></div><div class="sc" id="tswb" hidden><table id="tsw"></table></div><div class="f" style="justify-content:space-between;margin:14px 0 8px"><h2 style="margin:0" id="sh">Seznam storen</h2><button class="btn" id="stt" aria-expanded="false" title="Rozbalit / zabalit">Rozbalit ▾</button></div><div class="sc"><table id="ts" class="zb"></table></div><div class="sub" style="margin-top:8px" id="snote"></div></div>
+<div class="card" id="gicard" style="margin-bottom:12px"><div class="f" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" id="tgh">Prodej po skupinách</h2><div class="f"><select id="gsel" title="Prodej po skupinách za vybraného číšníka"></select><button class="btn" id="gmb" aria-pressed="false" title="Tržba po skupinách pro všechny číšníky vedle sebe">Skupiny × číšníci</button><button class="btn" id="gie" aria-expanded="false">Rozbalit skupiny</button><button class="btn" id="gipdf" title="Vyberte skupiny a uložte prodej položek po skupinách do PDF (za vybraného číšníka nebo všechny)">Export do PDF</button></div></div><div class="sc"><table id="tgi"></table></div><div class="sub" style="margin-top:8px">Kliknutím na skupinu zobrazíte její položky. Tržba je po slevách a stornech, „Před slevou“ = ks × ceníková cena, sleva = rozdíl.</div><div class="sub" style="margin-top:4px" id="ginote"></div><h2 style="margin-top:14px" id="tgmh" hidden>Tržba: skupiny × číšník</h2><div class="sc" id="tgmw" hidden><table id="tgm"></table></div></div>
+<div class="card cl" id="wcard" style="margin-bottom:12px"><div class="f wh" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" class="wtg" title="Rozbalit / sbalit"><span class="chv">▸</span> Prodej položek po číšnících</h2><div class="f wct"><input id="wq" type="search" placeholder="Název položky nebo skupiny…" hidden><button class="btn" id="wqb" aria-expanded="false">Hledat položku</button><select id="wsel"></select><button class="btn" id="wpdf" title="Uloží prodej položek vybraného číšníka (nebo všech) do PDF">Uložit do PDF</button></div></div><div class="sc"><table id="tw2"></table></div><div class="sub" style="margin:8px 0"><a href="#" id="mw" style="color:var(--ac)"></a></div><h2 style="margin-top:14px" id="tmh">Matice: počet kusů (top 15 položek × číšník)</h2><div class="sc"><table id="tm"></table></div></div>
+<div class="card cl" id="ocard" style="margin-bottom:12px;display:none"><div class="f wh" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" class="wtg" title="Rozbalit / sbalit"><span class="chv">▸</span> Objednávky po číšnících</h2><div class="f wct"><input id="oq" type="search" placeholder="Název položky nebo skupiny…" hidden><button class="btn" id="oqb" aria-expanded="false">Hledat položku</button><select id="osel" title="Položky objednané vybraným číšníkem"></select><button class="btn" id="opdf" title="Uloží objednávky po číšnících a objednané položky vybraného číšníka do PDF">Uložit do PDF</button></div></div><div class="sc"><table id="to"></table></div><h2 style="margin-top:14px" id="o2h">Objednané položky</h2><div class="sc"><table id="to2"></table></div><div class="sub" style="margin-top:8px"><a href="#" id="mo2" style="color:var(--ac)"></a></div><div class="sub" style="margin-top:6px" id="onote"></div></div>
+<div class="card cl" id="ogcard" style="margin-bottom:12px;display:none"><div class="f wh" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" class="wtg" title="Rozbalit / sbalit"><span class="chv">▸</span> <span id="ogh">Objednávky po skupinách</span></h2><div class="f wct"><select id="ogsel" title="Objednávky po skupinách za vybraného číšníka"></select><button class="btn" id="ogmb" aria-pressed="false" title="Objednávky po skupinách pro všechny číšníky vedle sebe">Skupiny × číšníci</button></div></div><div class="sc"><table id="tog"></table></div><h2 style="margin-top:14px" id="togmh" hidden>Objednávky: skupiny × číšník</h2><div class="sc" id="togmw" hidden><table id="togm"></table></div><div class="sub" style="margin-top:8px">Objednávky v cenách objednávky (bez slev), stejně jako v kartě „Objednávky po číšnících“.</div></div>
+<div class="card cl" id="icard"><div class="f wh" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0" class="wtg" title="Rozbalit / sbalit"><span class="chv">▸</span> Prodej po položkách</h2><div class="f"><input id="q" class="wct" placeholder="Hledat položku…"><button class="btn" id="ipdf" title="Vyberte skupiny a uložte prodej položek do PDF">Export do PDF</button></div></div>
+<div class="sc"><table id="ti"></table></div><div class="sub" style="margin-top:8px"><a href="#" id="mo" style="color:var(--ac)"></a></div></div>
+<p class="note" style="text-align:center">Zdroj: Data z Vašeho pokladního systému FoodMan</p></div>
+<div id="vc" hidden></div>
+<script>
+const DATA=(D=>{const K=D.K;if(K){const u=o=>{if(!o||!o['~'])return o;const r={};for(const [i,v] of o['~'])r[K[i]]=v;return r};// rozbalení kompaktních dat (názvy položek jsou v DATA.K)
+ for(const x of Object.values(D.days)){if(x.i)x.i=u(x.i);if(x.ip)x.ip=u(x.ip);for(const p of ['wi','wip','ki'])if(x[p])for(const w in x[p])x[p][w]=u(x[p][w])}}return D})(/*DATA*/);const days=Object.keys(DATA.days).sort();
+// měsíce, kde jsou položky po číšnících jen za celý měsíc (uložené k prvnímu dni měsíce)
+function wmNote(){const W=DATA.wm||[];let n=document.getElementById('wmnote');const a=A.value,b=B.value,cast=W.filter(m=>{const md=days.filter(d=>d.startsWith(m));return md.length&&(md[0]<a||md[md.length-1]>b)&&md[md.length-1]>=a&&md[0]<=b});
+ if(!n){const c=document.getElementById('wcard');if(!c)return;n=document.createElement('div');n.id='wmnote';n.className='mu';n.style.cssText='margin:0 0 8px;font-size:13px';c.firstElementChild.after(n)}
+ n.textContent=cast.length?'Pozn.: u měsíců '+cast.map(m=>+m.slice(4)+'/'+m.slice(0,4)).join(', ')+' jsou položky po číšnících uložené jen za celý měsíc (započítají se, když období obsahuje 1. den měsíce). Pro přesné číslo vyberte celé měsíce.':'';n.hidden=!cast.length}
+Object.values(DATA.days).forEach(x=>{if(x.gz&&Object.values(x.gz).some(v=>v))x.gh=x.gz});// počet hostů = položky „zákazník ráno / večer“, pokud je restaurace používá
+const fm=n=>Math.round(n).toLocaleString('cs-CZ')+' Kč',fd=d=>+d.slice(6)+'. '+ +d.slice(4,6)+'.';
+function lim12(){(lim12.ids||[]).forEach(id=>{const t=document.getElementById(id),w=t.parentElement,r=t.rows;w.style.maxHeight='';if(r.length>13){const b=r[12].getBoundingClientRect().bottom-t.getBoundingClientRect().top;w.style.maxHeight=Math.ceil(b)+'px'}})}
+addEventListener('resize',()=>lim12());
+const A=document.getElementById('a'),B=document.getElementById('b');
+days.forEach(d=>{A.add(new Option(fd(d),d));B.add(new Option(fd(d),d))});A.value=days[0];B.value=days.at(-1);
+// ---------- Volba měsíce (jen u sloučeného reportu s více měsíci) ----------
+const MS=document.getElementById('mes'),MN=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'],MO=[...new Set(days.map(d=>d.slice(0,6)))];
+if(MO.length>1){document.getElementById('mesl').hidden=false;
+ MS.add(new Option('Celé období','*'));MO.slice().reverse().forEach(m=>MS.add(new Option(MN[+m.slice(4)-1]+' '+m.slice(0,4),m)));MS.add(new Option('vlastní výběr',''));MS.options[MS.options.length-1].hidden=true;
+ const rng=m=>{const L=m==='*'?days:days.filter(d=>d.startsWith(m));return[L[0],L.at(-1)]};
+ const syncM=()=>{MS.value=[...MS.options].map(o=>o.value).find(m=>m&&(([x,y])=>x===A.value&&y===B.value)(rng(m)))??''};
+ MS.onchange=()=>{if(!MS.value)return;[A.value,B.value]=rng(MS.value);A.dispatchEvent(new Event('change'))};
+ A.addEventListener('change',syncM);B.addEventListener('change',syncM);
+ [A.value,B.value]=rng(MO.at(-1));syncM()}
+let giCtx={gr:{},wi:{},wt:{}},sortK=1,showAll=false,showW=false,showGM=false,ch,cd;
+const cs=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const STN=(/*STN*/0)||{};
+const KK0=/^Konzumační karta(?:[ \/]([^,]+))?,\s*([^\/,]*?)\s*\/[^/]*\/([^/]*)\/?\s*$/,PK0=/^Personální karta,\s*([^\/,]*?)\s*\/[^/]*\/([^/]*)\/?\s*$/,KK={exec:k=>{const m=KK0.exec(k);if(m)return [m[0],'Konzumační karta'+(m[1]?' '+m[1].trim():''),m[2],m[3]];const q=PK0.exec(k);return q?[q[0],'Personální karta',q[1],q[2]]:null}};// Personální karta (Rustonka) – v přehledu po držitelích jako samostatný sloupec
+const PJ={'Hotove':'Hotově','Hotove Kc':'Hotově'};
+const KF0=/^Karta faktura,\s*([^\/,]*?)\s*\/[^/]*\/([^/]*)\/?\s*$/,HASUV=Object.values(DATA.days).some(x=>Object.keys(x.p).some(k=>{const m=KK.exec(k);return m&&/úvěr/i.test(m[1])}));
+// Personální strava: kde je konzumační karta úvěrová, jen ta (DockHouse…); jinde konzumační karty, karty faktura a „Personalni strava“
+const PS=k=>{const m=KK.exec(k);if(m)return (!HASUV||/úvěr/i.test(m[1]))?(m[2]||'')+'|'+m[3].trim():null;if(HASUV)return null;const f=KF0.exec(k);if(f)return f[1]+'|'+f[2].trim();if(/^Personaln[ií] strava\W*$/i.test(k.trim()))return '|Personální strava (bez karty)';return null};
+const CK=/^([^,*\/]+),\s*\*{4,}\d*\/?\s*$/;// platba kartou s maskovaným číslem, např. MC,************7328/ → „Platební karta MC“
+const pk=k=>{const m=KK.exec(k);if(m)return m[1];const c=CK.exec(k);if(c)return 'Platební karta '+c[1].trim();const e=/^(Kredit [^,\/]+),.*$/.exec(k.trim());return e?e[1].trim():(PJ[k.trim()]||k)};// Kredit EC,<karta>/… → „Kredit EC“
+const agg=o=>{const r={};for(const k in o){const t=pk(k);r[t]=(r[t]||0)+o[k]}return r};
+function sel(){const a=A.value,b=B.value;return days.filter(d=>d>=a&&d<=b).map(d=>DATA.days[d])}
+function sum(S,key,f){const o={};S.forEach(x=>{for(const k in x[key]){const v=x[key][k];f(o,k,v)}});return o}
+function render(){
+wmNote();const S=sel(),ds=days.filter(d=>d>=A.value&&d<=B.value);
+const hr=sum(S,'h',(o,k,v)=>o[k]=(o[k]||0)+v),hn=sum(S,'hn',(o,k,v)=>o[k]=(o[k]||0)+v),gh=sum(S,'gh',(o,k,v)=>o[k]=(o[k]||0)+v),gs=Object.values(gh).reduce((a,b)=>a+b,0),hasG=Object.values(DATA.days).some(x=>x.gh&&Object.values(x.gh).some(v=>v));
+const tot=S.reduce((s,x)=>s+Object.values(x.k||{}).reduce((a,v)=>a+v,0),0),n=Object.values(hn).reduce((a,b)=>a+b,0);
+document.getElementById('sub').textContent=ds.length+' dní · '+n+' účtů';
+const SDEF=[['41','Kuchyně','Kuchyně'],['51','Bar','Bar'],['42','Bar','Bar'],['52','Kantýna','Kantýna'],['71','Ostatní','Merch a servis']];
+{const kn=new Set(SDEF.map(d=>d[0])),ex={};Object.values(DATA.days).forEach(x=>{for(const c in (x.k||{}))if(!kn.has(c)&&Math.abs(x.k[c])>=0.5)ex[c]=(ex[c]||0)+x.k[c]});Object.keys(ex).sort((a,b)=>ex[b]-ex[a]).forEach(c=>SDEF.push([c,'Středisko '+c,'Středisko '+c]))}// další střediska z dat (názvy v strediska.json)
+const usedB={},pres=new Set();Object.values(DATA.days).forEach(x=>{for(const c in (x.k||{}))if(Math.abs(x.k[c])>=0.5)pres.add(c)});const SD=SDEF.map(([c,n,kn])=>{const nm=STN[c],l=nm||n;let col=/^kuch/i.test(l)?'k':/^bar/i.test(l)?'b':(c=='52'?'ac':'mu');if(pres.has(c)&&col!=='mu'&&col!=='ac'){if(usedB[col])col=col=='b'?'ac':'mu';usedB[col]=1}return {c,l:l+' ('+c+')',kl:(nm||kn)+' ('+c+')',col,cls:col=='k'?'kit':col=='b'?'bar':''}});
+const stt=c=>S.reduce((s,x)=>s+(x.k[c]||0),0);
+const DPH=DATA.dph||{},hasD=Object.keys(DPH).length>0||S.some(x=>x.pd);let gi=0,ni=0;if(hasD)S.forEach(x=>{for(const c in x.i){const v=x.i[c][1];gi+=v;ni+=v/(DPH[c]||1.21)}});let tbd=Math.abs(gi)>0.005?tot*ni/gi:tot;const exD=S.length>0&&S.every(x=>x.pd);// přesně: součet základů spočítaných za každý účet a sazbu (stejně jako Měsíční reporty)
+let tpay=tot;if(exD){let g=0,d=0;S.forEach(x=>{for(const l in x.pd)for(const z in x.pd[l]){g+=Math.round(x.pd[l][z][0]*100);d+=Math.round(x.pd[l][z][1]*100)}});tbd=(g-d)/100;tpay=g/100}// tržba = součet plateb (jako v Měsíčních reportech)
+document.getElementById('kpi').innerHTML=[['Tržba celkem',(exD?fm(tpay):fm(tot))+(hasD?`<div class="sub" style="font-weight:400;font-size:11px;margin-top:3px">Tržba celkem bez DPH: <b style="white-space:nowrap">${exD?tbd.toLocaleString('cs-CZ',{minimumFractionDigits:2,maximumFractionDigits:2})+' Kč':fm(tbd)}</b></div>`:''),''],[hasG?'Počet účtů / hostů':'Počet účtů',hasG?n+' / '+gs.toLocaleString('cs-CZ'):n,''],[hasG?'Průměr na účet / hosta':'Průměr na účet',(hasG?'<span style="white-space:nowrap">'+fm(tot/(n||1))+' /</span> <span style="white-space:nowrap">'+(gs?fm(tot/gs):'–')+'</span>':fm(tot/(n||1))),'']].map(([l,v])=>`<div class="card"><div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('')+SD.map(d=>[d,stt(d.c)]).filter(([d,v])=>Math.round(v)).map(([d,v])=>`<div class="card ${d.cls}"><div class="kl">${esc(d.kl)}</div><div class="kv">${fm(v)}<span class="sub" style="white-space:nowrap"> · ${Math.round(100*v/(tot||1))} %</span></div></div>`).join('');
+const H=[...Array(19).keys()].map(i=>i+5),ac=cs('--ac'),OB=16,isOb=h=>+h>=5&&+h<OB;// oběd = od začátku do 16:00, večer = zbytek (vč. po půlnoci)
+{const ob=[0,0,0],ov=[0,0,0];for(const h in hr){(isOb(h)?ob:ov)[0]+=hr[h]}for(const h in hn){(isOb(h)?ob:ov)[1]+=hn[h]}for(const h in gh){(isOb(h)?ob:ov)[2]+=gh[h]}const ht=ob[0]+ov[0]||1;document.getElementById('obv').innerHTML=[['Tržba oběd · do '+OB+':00',ob,ac],['Tržba večer · od '+OB+':00',ov,ac+'88']].map(([l,v,c])=>`<div style="border-left:4px solid ${c};padding-left:10px"><div class="kl">${l}</div><div class="kv" style="font-size:20px">${fm(v[0])}</div><div class="sub">${(100*v[0]/ht).toFixed(1)} % · ${v[1]} účtů${hasG?' · '+v[2]+' hostů':''}</div></div>`).join('')}
+ch&&ch.destroy();ch=new Chart(document.getElementById('ch'),{type:'bar',data:{labels:H.map(h=>h+':00'),datasets:[{label:'Tržba',data:H.map(h=>Math.round(hr[h]||0)),backgroundColor:H.map(h=>isOb(h)?ac:ac+'88')}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fm(c.raw)+' · '+(hn[H[c.dataIndex]]||0)+' účtů'}}},scales:{x:{ticks:{color:cs('--mu')}},y:{ticks:{color:cs('--mu')},grid:{color:cs('--ln')}}}}});
+cd&&cd.destroy();cd=new Chart(document.getElementById('cd'),{type:'bar',data:{labels:ds.map(fd),datasets:SD.map(d=>({label:d.l,data:ds.map(x=>Math.round(DATA.days[x].k[d.c]||0)),backgroundColor:cs('--'+d.col)})).filter(x=>x.data.some(v=>v))},options:{maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{color:cs('--mu')}},y:{stacked:true,ticks:{color:cs('--mu')},grid:{color:cs('--ln')}}},plugins:{legend:{labels:{color:cs('--tx')}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fm(c.raw)}}}}});
+const p=sum(S,'p',(o,k,v)=>{k=pk(k);o[k]=(o[k]||0)+v}),pt=Object.values(p).reduce((a,b)=>a+b,0)||1;
+lim12.ids=['tp','tw'];document.getElementById('tp').innerHTML='<tr><th>Platba</th><th>Částka</th><th>Podíl</th></tr>'+Object.entries(p).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${k}</td><td>${fm(v)}</td><td>${(100*v/pt).toFixed(1)} %<span class="bg" style="width:${60*v/pt}px"></span></td></tr>`).join('');
+renderAk(S);
+const w=sum(S,'w',(o,k,v)=>{o[k]=o[k]||[0,0];o[k][0]+=v[0];o[k][1]+=v[1]});
+document.getElementById('tw').innerHTML='<tr><th>Obsluha</th><th>Účtů</th><th>Tržba</th><th>Ø účet</th></tr>'+Object.entries(w).sort((a,b)=>b[1][1]-a[1][1]).map(([k,v])=>`<tr><td>${k}</td><td>${v[0]}</td><td>${fm(v[1])}</td><td>${v[0]?fm(v[1]/v[0]):'–'}</td></tr>`).join('');lim12();
+const gr=sum(S,'g',(o,k,v)=>{o[k]=o[k]||[0,0];o[k][0]+=v[0];o[k][1]+=v[1]});
+const GL=Object.entries(gr).sort((a,b)=>b[1][1]-a[1][1]),gx=Math.max(...GL.map(r=>r[1][1]),1),gt=GL.reduce((s,r)=>s+r[1][1],0)||1;
+const wi={};S.forEach(x=>{for(const w in (x.wi||{})){wi[w]=wi[w]||{};for(const k in x.wi[w]){const v=x.wi[w][k],o=wi[w][k]=wi[w][k]||[0,0];o[0]+=v[0];o[1]+=v[1]}}});
+const wt={};for(const w in wi)wt[w]=Object.values(wi[w]).reduce((s,v)=>s+v[1],0);
+const WL=Object.keys(wi).sort((a,b)=>wt[b]-wt[a]),ws=document.getElementById('wsel'),cur=ws.value;
+// ---------- Prodej číšníků po skupinách (v kartě „Prodej po skupinách“) ----------
+{const GW={};for(const w in wi){const o=GW[w]={};for(const k in wi[w]){const g=DATA.grp[k]||'bez skupiny',a=o[g]=o[g]||[0,0];a[0]+=wi[w][k][0];a[1]+=wi[w][k][1]}}
+ const gs=document.getElementById('gsel'),gc=gs.value;
+ gs.innerHTML='<option value="">Všichni číšníci</option>'+WL.map(w=>`<option value="${esc(w)}">${esc(w)} · ${fm(wt[w])}</option>`).join('');gs.value=WL.includes(gc)?gc:'';gs.hidden=!WL.length;document.getElementById('gmb').hidden=WL.length<2;
+ giCtx={gr,wi,wt};
+ const gb=document.getElementById('gmb');gb.setAttribute('aria-pressed',showGM);gb.textContent=showGM?'Skrýt skupiny × číšníci':'Skupiny × číšníci';
+ document.getElementById('tgmh').hidden=document.getElementById('tgmw').hidden=!showGM;
+ if(showGM){const GN=Object.keys(gr).filter(g=>WL.some(w=>GW[w][g])).sort((a,b)=>gr[b][1]-gr[a][1]),c=(w,g)=>GW[w][g]&&Math.abs(GW[w][g][1])>=0.5?fm(GW[w][g][1]):'–';
+  document.getElementById('tgm').innerHTML='<tr><th>Skupina</th>'+WL.map(w=>`<th>${esc(w)}</th>`).join('')+'<th>Celkem</th></tr>'+GN.map(g=>`<tr><td>${esc(g)}</td>`+WL.map(w=>`<td>${c(w,g)}</td>`).join('')+`<td><b>${fm(WL.reduce((s,w)=>s+(GW[w][g]?GW[w][g][1]:0),0))}</b></td></tr>`).join('')+'<tr><td><b>Celkem</b></td>'+WL.map(w=>`<td><b>${fm(wt[w])}</b></td>`).join('')+`<td><b>${fm(WL.reduce((s,w)=>s+wt[w],0))}</b></td></tr>`}}
+const wall=WL.reduce((s,w)=>s+wt[w],0);ws.innerHTML='<option value="">Všichni číšníci · '+fm(wall)+'</option>'+WL.map(w=>`<option value="${esc(w)}">${esc(w)} · ${fm(wt[w])}</option>`).join('');ws.value=WL.includes(cur)?cur:'';
+const WALL={};WL.forEach(w=>{for(const k in wi[w]){const v=wi[w][k],o=WALL[k]=WALL[k]||[0,0];o[0]+=v[0];o[1]+=v[1]}});
+const WR=Object.entries(ws.value?wi[ws.value]||{}:WALL).map(([k,v])=>[DATA.names[k]||k,v[0],v[1],DATA.grp[k]||'']).sort((a,b)=>b[2]-a[2]),wtot=(ws.value?wt[ws.value]:wall)||1,wmx=Math.max(...WR.map(r=>r[2]),1);
+const nq=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),wqv=nq(document.getElementById('wq').value.trim()),WF=wqv?WR.filter(r=>nq(r[0]).includes(wqv)||nq(r[3]).includes(wqv)):WR;
+document.getElementById('tw2').innerHTML='<tr><th>Položka</th><th>Skupina</th><th>Ks</th><th>Tržba</th><th>Podíl</th></tr>'+(wqv&&!WF.length?'<tr><td colspan="5" class="sub" style="text-align:left">'+(ws.value?'Číšník tuto položku neprodal.':'Tato položka nebyla prodána.')+'</td></tr>':'')+(showW||wqv?WF:WF.slice(0,20)).map(r=>`<tr><td>${r[0]}</td><td style="color:var(--mu)">${r[3]}</td><td>${Math.round(r[1]*10)/10}</td><td>${fm(r[2])}<span class="bg" style="width:${80*r[2]/wmx}px"></span></td><td>${(100*r[2]/wtot).toFixed(1)} %</td></tr>`).join('');
+if(wqv&&WF.length>1){const a=WF.reduce((s,r)=>[s[0]+r[1],s[1]+r[2]],[0,0]);document.getElementById('tw2').innerHTML+=`<tr><td><b>Celkem</b></td><td style="color:var(--mu)">${WF.length} položek</td><td><b>${Math.round(a[0]*10)/10}</b></td><td><b>${fm(a[1])}</b></td><td><b>${(100*a[1]/wtot).toFixed(1)} %</b></td></tr>`}
+WX={WL,wt,wall,R:WF,w:ws.value,tot:wtot,q:document.getElementById('wq').value.trim()};
+document.getElementById('mw').textContent=wqv?'':WR.length>20?(showW?'Zobrazit jen top 20':'Zobrazit všech '+WR.length+' položek'):'';
+const IT={};WL.forEach(w=>{for(const k in wi[w])IT[k]=(IT[k]||0)+wi[w][k][1]});
+const TOP=Object.keys(IT).filter(k=>!wqv||nq(DATA.names[k]||k).includes(wqv)||nq(DATA.grp[k]||'').includes(wqv)).sort((a,b)=>IT[b]-IT[a]).slice(0,wqv?50:15);
+document.getElementById('tmh').textContent=wqv?'Matice: počet kusů (nalezené položky × číšník)':'Matice: počet kusů (top 15 položek × číšník)';
+document.getElementById('tm').innerHTML='<tr><th>Položka</th>'+WL.map(w=>`<th>${w}</th>`).join('')+'</tr>'+TOP.map(k=>`<tr><td>${DATA.names[k]||k}</td>`+WL.map(w=>`<td>${wi[w][k]?Math.round(wi[w][k][0]*10)/10:'–'}</td>`).join('')+'</tr>').join('');
+const it=sum(S,'i',(o,k,v)=>{o[k]=o[k]||[0,0];o[k][0]+=v[0];o[k][1]+=v[1]});
+const qv=document.getElementById('q').value.toLowerCase();
+let L=Object.entries(it).map(([k,v])=>[DATA.names[k]||k,v[0],v[1],DATA.grp[k]||'']).filter(r=>r[0].toLowerCase().includes(qv)).sort((a,b)=>sortK==0?a[0].localeCompare(b[0],'cs'):b[sortK]-a[sortK]);
+const mx=Math.max(...L.map(r=>r[2]),1),tot2=L.length;if(!showAll)L=L.slice(0,15);
+document.getElementById('ti').innerHTML='<tr><th data-s="0">Položka</th><th>Skupina</th><th data-s="1">Ks</th><th data-s="2">Tržba</th></tr>'+L.map(r=>`<tr><td>${r[0]}</td><td style="color:var(--mu)">${r[3]}</td><td>${Math.round(r[1]*10)/10}</td><td>${fm(r[2])}<span class="bg" style="width:${80*r[2]/mx}px"></span></td></tr>`).join('');
+document.getElementById('mo').textContent=tot2>15?(showAll?'Zobrazit jen top 15':'Zobrazit všech '+tot2+' položek'):'';
+document.querySelectorAll('#ti th').forEach(t=>t.onclick=()=>{sortK=+t.dataset.s;render()});
+renderSt(ds,tot);renderOb(ds);renderGi();
+}
+function tgl(tid,bid){const t=document.getElementById(tid),b=document.getElementById(bid);b.onclick=()=>{const o=t.classList.toggle('zb')===false;b.textContent=o?'Zabalit ▴':'Rozbalit ▾';b.setAttribute('aria-expanded',o);const no=document.getElementById('snote');if(tid==='ts'&&no.dataset.t)no.textContent=o?no.dataset.t:''}}
+tgl('ta','akt');tgl('ts','stt');
+{const b=document.getElementById('swt'),w=document.getElementById('tswb');b.onclick=()=>{w.hidden=!w.hidden;b.textContent=w.hidden?'Rozbalit ▾':'Zabalit ▴';b.setAttribute('aria-expanded',!w.hidden)}}
+function renderAk(S){
+const A2={},TY=new Set();S.forEach(x=>{for(const k in x.p){const m=KK.exec(k);if(!m)continue;const id=(m[2]||'')+'|'+m[3].trim(),o=A2[id]=A2[id]||{};TY.add(m[1]);o[m[1]]=(o[m[1]]||0)+x.p[k]}});
+const T=[...TY].sort((a,b)=>(/úvěr/i.test(b)-/úvěr/i.test(a))||a.localeCompare(b,'cs')),ak=T.some(t=>/akcion/i.test(t));
+const R=Object.entries(A2).map(([k,o])=>{const v=T.map(t=>o[t]||0);return [...k.split('|'),v,v.reduce((a,b)=>a+b,0)]}).filter(r=>r[2].some(v=>Math.round(v))).sort((a,b)=>b[3]-a[3]);
+const psOK=S.some(x=>Object.keys(x.p).some(k=>PS(k)!==null)),el=document.getElementById('akc');el.hidden=!R.length&&!psOK;document.getElementById('psb').hidden=!psOK;document.getElementById('akt').hidden=!R.length;if(!R.length){document.getElementById('akh').textContent='Personální strava';document.getElementById('ta').innerHTML='';return}
+document.getElementById('akh').textContent='Konzumační karty po '+(ak?'akcionářích':'držitelích');
+const su=T.map((t,i)=>R.reduce((s,r)=>s+r[2][i],0)),st=su.reduce((a,b)=>a+b,0);
+const c=v=>v?fm(v):'–';
+document.getElementById('ta').innerHTML='<tr><th>Č. karty</th><th style="text-align:left">'+(ak?'Akcionář':'Držitel karty')+'</th>'+T.map(t=>`<th>${esc(t)}</th>`).join('')+'<th>Celkem</th></tr>'+R.map(r=>`<tr class="ar"><td>${esc(r[0])}</td><td style="text-align:left">${esc(r[1])}</td>${r[2].map(v=>`<td>${c(v)}</td>`).join('')}<td><b>${fm(r[3])}</b></td></tr>`).join('')+`<tr><td><b>Celkem</b></td><td style="text-align:left">${R.length} ${ak?'akcionářů':'držitelů'}</td>${su.map(v=>`<td><b>${fm(v)}</b></td>`).join('')}<td><b>${fm(st)}</b></td></tr>`;
+}
+// ---------- PDF: Prodej položek po číšnících ----------
+let WX=null;
+function wPdf(){const X=WX;if(!X||!X.WL.length){alert('Ve vybraném období nejsou žádné údaje o prodeji po číšnících.');return}
+ const r1=n=>(Math.round(n*10)/10).toLocaleString('cs-CZ'),per=A.value===B.value?'den '+fd2(A.value):fd2(A.value)+' – '+fd2(B.value);
+ let h='<div class="doc"><h1>Prodej položek po číšnících</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+per+' · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>';
+ h+='<table><tr><th>Číšník</th><th>Tržba</th><th>Podíl</th></tr>'+X.WL.map(w=>`<tr${X.w===w?' class="tl"':''}><td>${esc(w)}</td><td>${m2(X.wt[w])}</td><td>${(100*X.wt[w]/(X.wall||1)).toFixed(1)} %</td></tr>`).join('')+`<tr class="tl"><td>Celkem</td><td>${m2(X.wall)}</td><td></td></tr></table>`;
+ h+='<h1 style="font-size:16px;margin-top:6px">Prodané položky – '+esc(X.w||'všichni číšníci')+(X.q?' – hledání: '+esc(X.q):'')+'</h1>';
+ h+=X.R.length?'<table><tr><th>Položka</th><th style="text-align:left">Skupina</th><th>Ks</th><th>Tržba</th><th>Podíl</th></tr>'+X.R.map(r=>`<tr><td>${esc(String(r[0]).trim())}</td><td style="text-align:left">${esc(r[3])}</td><td>${r1(r[1])}</td><td>${m2(r[2])}</td><td>${(100*r[2]/(X.tot||1)).toFixed(1)} %</td></tr>`).join('')+`<tr class="tl"><td>Celkem</td><td style="text-align:left">${X.R.length} položek</td><td>${r1(X.R.reduce((s,r)=>s+r[1],0))}</td><td>${m2(X.R.reduce((s,r)=>s+r[2],0))}</td><td>${(100*X.R.reduce((s,r)=>s+r[2],0)/(X.tot||1)).toFixed(1)} %</td></tr></table>`:'<p class="mu">Žádné položky.</p>';
+ h+='<div class="mu">Částky v Kč.</div></div>';
+ const vc=document.getElementById('vc');vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="vcx">Zavřít</button></div>'+h;vc.hidden=false;vc.scrollTop=0;
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('vcp').onclick=()=>pr(false,true);pr(false,true)}
+document.getElementById('wpdf').onclick=wPdf;
+// ---------- Objednávky po číšnících (záznamy OB z pokladny; bez storen objednávek a bez zrušených před objednáním) ----------
+let showO=false,OBX=null,OBDS=[];
+function obPdf(){const X=OBX;if(!X||!X.WL.length){alert('Ve vybraném období nejsou žádné objednávky.');return}
+ const r1=n=>(Math.round(n*10)/10).toLocaleString('cs-CZ'),per=A.value===B.value?'den '+fd2(A.value):fd2(A.value)+' – '+fd2(B.value);
+ let h='<div class="doc"><h1>Objednávky po číšnících</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+per+' · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>';
+ h+='<table><tr><th>Číšník</th><th>Objednávek</th><th>Kusů</th><th>Částka</th><th>Ø objednávka</th><th>Podíl</th></tr>'+X.WL.map(w=>`<tr${X.w===w?' class="tl"':''}><td>${esc(w)}</td><td>${X.N[w]||0}</td><td>${r1(X.WT[w][0])}</td><td>${m2(X.WT[w][1])}</td><td>${X.N[w]?m2(X.WT[w][1]/X.N[w]):'–'}</td><td>${(100*X.WT[w][1]/(X.tv||1)).toFixed(1)} %</td></tr>`).join('')+`<tr class="tl"><td>Celkem</td><td>${X.tn}</td><td>${r1(X.tq)}</td><td>${m2(X.tv)}</td><td>${X.tn?m2(X.tv/X.tn):'–'}</td><td></td></tr></table>`;
+ h+='<h1 style="font-size:16px;margin-top:6px">Objednané položky (top 10, podle skupin) – '+esc(X.w||'všichni číšníci')+'</h1>';
+ h+=X.R.length?'<table><tr><th>Položka</th><th style="text-align:left">Skupina</th><th>Ks</th><th>Částka</th><th>Podíl</th></tr>'+X.R.slice(0,10).sort((a,b)=>String(a[3]).localeCompare(String(b[3]),'cs')||b[2]-a[2]).map(r=>`<tr><td>${esc(String(r[0]).trim())}</td><td style="text-align:left">${esc(r[3])}</td><td>${r1(r[1])}</td><td>${m2(r[2])}</td><td>${(100*r[2]/(X.tot||1)).toFixed(1)} %</td></tr>`).join('')+`${X.R.length>10?`<tr><td colspan="3" class="mu">Ostatní (${X.R.length-10} položek)</td><td>${m2(X.R.slice(10).reduce((s,r)=>s+r[2],0))}</td><td>${(100*X.R.slice(10).reduce((s,r)=>s+r[2],0)/(X.tot||1)).toFixed(1)} %</td></tr>`:''}<tr class="tl"><td>Celkem</td><td style="text-align:left">${X.R.length} položek</td><td>${r1(X.R.reduce((s,r)=>s+r[1],0))}</td><td>${m2(X.tot)}</td><td></td></tr></table>`:'<p class="mu">Žádné položky.</p>';
+ h+='<div class="mu">Objednávky zadané číšníky v cenách objednávky (bez slev). Storna objednávek jsou odečtena, objednávky zrušené před objednáním a položky automaticky vrácené na stůl po stornu účtu nejsou započítány.'+(X.miss?' Pro '+X.miss+' dní ve vybraném období report neobsahuje údaje o objednávkách.':'')+' Částky v Kč.</div></div>';
+ const vc=document.getElementById('vc');vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="vcx">Zavřít</button></div>'+h;vc.hidden=false;vc.scrollTop=0;
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('vcp').onclick=()=>pr(false,true);pr(false,true)}
+document.getElementById('opdf').onclick=obPdf;
+let showOGM=false;
+function renderOg(O,WT,WL,tv,ds){// Objednávky po skupinách (obdoba karty „Prodej po skupinách“)
+ const GW={},GA={};for(const w in O){const o=GW[w]={};for(const k in O[w]){const g=DATA.grp[k]||'bez skupiny',a=o[g]=o[g]||[0,0],b=GA[g]=GA[g]||[0,0];a[0]+=O[w][k][0];a[1]+=O[w][k][1];b[0]+=O[w][k][0];b[1]+=O[w][k][1]}}
+ const gs=document.getElementById('ogsel'),gc=gs.value;
+ gs.innerHTML='<option value="">Všichni číšníci · '+fm(tv)+'</option>'+WL.map(w=>`<option value="${esc(w)}">${esc(w)} · ${fm(WT[w][1])}</option>`).join('');gs.value=WL.includes(gc)?gc:'';gs.hidden=!WL.length;document.getElementById('ogmb').hidden=WL.length<2;
+ document.getElementById('ogh').textContent='Objednávky po skupinách'+(gs.value?' – '+gs.value:'');
+ const G=gs.value?GW[gs.value]||{}:GA,L=Object.entries(G).filter(([,v])=>Math.abs(v[0])>=0.05||Math.abs(v[1])>=0.5).sort((a,b)=>b[1][1]-a[1][1]),mx=Math.max(...L.map(r=>r[1][1]),1),t=(gs.value?(WT[gs.value]||[0,0])[1]:tv)||1;
+ document.getElementById('tog').innerHTML=L.length?'<tr><th>Skupina</th><th>Ks</th><th>Částka</th><th>Podíl</th>'+(gs.value?'<th title="Kolik z celkových objednávek skupiny objednal tento číšník">Podíl na skupině</th>':'')+'</tr>'+L.map(([g,v])=>`<tr><td>${esc(g)}</td><td>${Math.round(v[0])}</td><td>${fm(v[1])}<span class="bg" style="width:${80*Math.max(v[1],0)/mx}px"></span></td><td>${(100*v[1]/t).toFixed(1)} %</td>${gs.value?`<td>${GA[g]&&GA[g][1]?(100*v[1]/GA[g][1]).toFixed(1)+' %':'–'}</td>`:''}</tr>`).join('')+`<tr><td><b>Celkem</b></td><td><b>${Math.round(L.reduce((s,r)=>s+r[1][0],0))}</b></td><td><b>${fm(L.reduce((s,r)=>s+r[1][1],0))}</b></td><td></td>${gs.value?'<td></td>':''}</tr>`:'<tr><td class="sub">Ve vybraném období nejsou žádné objednávky.</td></tr>';
+ const gb=document.getElementById('ogmb');gb.setAttribute('aria-pressed',showOGM);gb.textContent=showOGM?'Skrýt skupiny × číšníci':'Skupiny × číšníci';
+ document.getElementById('togmh').hidden=document.getElementById('togmw').hidden=!showOGM;
+ if(showOGM){const GN=Object.keys(GA).filter(g=>WL.some(w=>GW[w][g])).sort((a,b)=>GA[b][1]-GA[a][1]),c=(w,g)=>GW[w][g]&&Math.abs(GW[w][g][1])>=0.5?fm(GW[w][g][1]):'–';
+  document.getElementById('togm').innerHTML='<tr><th>Skupina</th>'+WL.map(w=>`<th>${esc(w)}</th>`).join('')+'<th>Celkem</th></tr>'+GN.map(g=>`<tr><td>${esc(g)}</td>`+WL.map(w=>`<td>${c(w,g)}</td>`).join('')+`<td><b>${fm(GA[g][1])}</b></td></tr>`).join('')+'<tr><td><b>Celkem</b></td>'+WL.map(w=>`<td><b>${fm(WT[w][1])}</b></td>`).join('')+`<td><b>${fm(tv)}</b></td></tr>`}
+ gs.onchange=()=>renderOb(ds);gb.onclick=()=>{showOGM=!showOGM;renderOb(ds)}}
+function renderOb(ds){OBDS=ds;
+const c=document.getElementById('ocard'),cg=document.getElementById('ogcard');if(!days.some(d=>DATA.days[d].o)){c.style.display=cg.style.display='none';return}c.style.display=cg.style.display='';
+const miss=ds.filter(d=>!DATA.days[d].o).length,O={},N={},IT={};
+ds.forEach(d=>{const x=DATA.days[d];for(const w in (x.o||{})){const o=O[w]=O[w]||{};for(const k in x.o[w]){const v=x.o[w][k],a=o[k]=o[k]||[0,0],b=IT[k]=IT[k]||[0,0];a[0]+=v[0];a[1]+=v[1];b[0]+=v[0];b[1]+=v[1]}}for(const w in (x.on||{}))N[w]=(N[w]||0)+x.on[w]});
+const WT={};for(const w in O){WT[w]=Object.values(O[w]).reduce((s,v)=>[s[0]+v[0],s[1]+v[1]],[0,0])}
+const WL=Object.keys(WT).sort((a,b)=>WT[b][1]-WT[a][1]),tn=WL.reduce((s,w)=>s+(N[w]||0),0),tq=WL.reduce((s,w)=>s+WT[w][0],0),tv=WL.reduce((s,w)=>s+WT[w][1],0);
+renderOg(O,WT,WL,tv,ds);
+const os=document.getElementById('osel'),cv=os.value;os.innerHTML='<option value="">Všichni číšníci · '+fm(tv)+'</option>'+WL.map(w=>`<option value="${esc(w)}">${esc(w)} · ${fm(WT[w][1])}</option>`).join('');os.value=WL.includes(cv)?cv:'';
+const r1=n=>Math.round(n*10)/10;
+document.getElementById('to').innerHTML=WL.length?'<tr><th>Číšník</th><th>Objednávek</th><th>Kusů</th><th>Částka</th><th>Ø objednávka</th><th>Podíl</th></tr>'+WL.map(w=>`<tr${os.value===w?' style="font-weight:600"':''}><td><a href="#" data-ow="${esc(w)}" style="color:var(--ac)">${esc(w)}</a></td><td>${N[w]||0}</td><td>${r1(WT[w][0])}</td><td>${fm(WT[w][1])}</td><td>${N[w]?fm(WT[w][1]/N[w]):'–'}</td><td>${(100*WT[w][1]/(tv||1)).toFixed(1)} %<span class="bg" style="width:${60*WT[w][1]/(tv||1)}px"></span></td></tr>`).join('')+`<tr><td><b>Celkem</b></td><td><b>${tn}</b></td><td><b>${r1(tq)}</b></td><td><b>${fm(tv)}</b></td><td>${tn?fm(tv/tn):'–'}</td><td></td></tr>`:'<tr><td class="sub">Ve vybraném období nejsou žádné objednávky.</td></tr>';
+document.querySelectorAll('#to a[data-ow]').forEach(a=>a.onclick=e=>{e.preventDefault();os.value=os.value===a.dataset.ow?'':a.dataset.ow;showO=false;renderOb(ds)});
+os.onchange=()=>{showO=false;renderOb(ds)};
+const src=os.value?O[os.value]||{}:IT,tot=os.value?(WT[os.value]||[0,0])[1]:tv;
+const R=Object.entries(src).map(([k,v])=>[DATA.names[k]||k,v[0],v[1],DATA.grp[k]||'']).filter(r=>Math.abs(r[1])>=0.05||Math.abs(r[2])>=0.5).sort((a,b)=>b[2]-a[2]||b[1]-a[1]),mx=Math.max(...R.map(r=>r[2]),1);
+OBX={WL,N,WT,R,tot,w:os.value,tn,tq,tv,miss};
+document.getElementById('o2h').textContent='Objednané položky – '+(os.value||'všichni číšníci');
+const nq=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),oqv=nq(document.getElementById('oq').value.trim()),RF=oqv?R.filter(r=>nq(r[0]).includes(oqv)||nq(r[3]).includes(oqv)):R;
+if(oqv)document.getElementById('o2h').textContent+=' – hledání: '+document.getElementById('oq').value.trim();
+document.getElementById('to2').innerHTML=R.length?'<tr><th>Položka</th><th>Skupina</th><th>Ks</th><th>Částka</th><th>Podíl</th></tr>'+(oqv&&!RF.length?'<tr><td colspan="5" class="sub" style="text-align:left">'+(os.value?'Číšník tuto položku neobjednal.':'Tato položka nebyla objednána.')+'</td></tr>':'')+(showO||oqv?RF:RF.slice(0,20)).map(r=>`<tr><td>${esc(String(r[0]).trim())}</td><td style="color:var(--mu)">${esc(r[3])}</td><td>${r1(r[1])}</td><td>${fm(r[2])}<span class="bg" style="width:${80*Math.max(r[2],0)/mx}px"></span></td><td>${(100*r[2]/(tot||1)).toFixed(1)} %</td></tr>`).join('')+(oqv&&RF.length>1?(a=>`<tr><td><b>Celkem</b></td><td style="color:var(--mu)">${RF.length} položek</td><td><b>${r1(a[0])}</b></td><td><b>${fm(a[1])}</b></td><td><b>${(100*a[1]/(tot||1)).toFixed(1)} %</b></td></tr>`)(RF.reduce((s,r)=>[s[0]+r[1],s[1]+r[2]],[0,0])):''):'';
+const m=document.getElementById('mo2');m.textContent=oqv?'':R.length>20?(showO?'Zobrazit jen top 20':'Zobrazit všech '+R.length+' položek'):'';m.onclick=e=>{e.preventDefault();showO=!showO;renderOb(ds)};
+document.getElementById('onote').textContent='Objednávky zadané číšníky v cenách objednávky (bez slev). Storna objednávek jsou odečtena, objednávky zrušené před objednáním a položky automaticky vrácené na stůl po stornu účtu nejsou započítány.'+(miss?' Pro '+miss+' '+(miss===1?'den':miss<5?'dny':'dní')+' ve vybraném období report neobsahuje údaje o objednávkách.':'');
+}
+function renderSt(ds,tot){
+const miss=ds.some(d=>!DATA.days[d].s),SL=[];let zp=0;ds.forEach(d=>(DATA.days[d].s||[]).forEach(r=>{if(/^Z/i.test(String(r[5]).trim())){zp++;return}SL.push([d,...r])}));// Z… = změna typu platby, není storno
+const sw={};SL.forEach(r=>{const o=sw[r[3]]=sw[r[3]]||[0,0];o[0]++;o[1]+=r[5]});
+const ss=document.getElementById('ssel'),cv=ss.value,SW=Object.keys(sw).sort((a,b)=>sw[b][1]-sw[a][1]);
+ss.innerHTML='<option value="">Všichni číšníci</option>'+SW.map(w=>`<option value="${esc(w)}">${esc(w)} · ${sw[w][0]}×</option>`).join('');ss.value=SW.includes(cv)?cv:'';
+const L=SL.filter(r=>!ss.value||r[3]===ss.value),n=L.length,su=L.reduce((a,r)=>a+r[5],0);
+document.getElementById('skpi').innerHTML=[['Počet storen',n],['Stornovaná suma',fm(su)],['Ø storno',n?fm(su/n):'–'],['Podíl na tržbě',(100*su/(tot||1)).toFixed(1)+' %']].map(([l,v])=>`<div class="card"><div class="kl">${l}</div><div class="kv">${v}</div></div>`).join('');
+document.getElementById('tsw').innerHTML=ss.value||!SW.length?'':'<tr><th>Číšník</th><th>Počet storen</th><th>Stornovaná suma</th><th>Podíl storen</th></tr>'+SW.map(w=>`<tr><td><a href="#" data-w="${esc(w)}" style="color:var(--ac)">${esc(w)}</a></td><td>${sw[w][0]}</td><td>${fm(sw[w][1])}</td><td>${(100*sw[w][1]/(su||1)).toFixed(1)} %<span class="bg" style="width:${60*sw[w][1]/(su||1)}px"></span></td></tr>`).join('');
+document.querySelectorAll('#tsw a').forEach(a=>a.onclick=e=>{e.preventDefault();ss.value=a.dataset.w;render()});
+document.getElementById('sh').textContent='Seznam storen'+(ss.value?' – '+ss.value:'');
+document.getElementById('ts').innerHTML=n?'<tr><th>Datum</th><th>Čas</th><th>Účet</th><th>Původní účet</th><th>Stůl</th><th>Číšník</th><th>Platba</th><th>Částka</th></tr>'+L.map((r,i)=>`<tr class="sr ar" data-i="${i}" style="cursor:pointer"><td>${fd(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[6])}</td><td>${esc(String(r[4]).replace(/\.0$/,''))}</td><td>${esc(r[3])}</td><td>${esc(r[7])}</td><td>${fm(r[5])}</td></tr><tr class="sd" hidden><td colspan="8" style="text-align:left;white-space:normal;color:var(--mu)">${r[8].map(p=>esc(DATA.names[p[0]]||p[0]).trim()+' '+(Math.round(p[1]*10)/10)+'× ('+fm(p[2])+')').join(' · ')||'bez položek'}</td></tr>`).join('')+`<tr><td><b>Celkem</b></td><td colspan="6" style="text-align:left">${n} storen</td><td><b>${fm(su)}</b></td></tr>`:'<tr><td class="sub">Ve vybraném období nejsou žádná storna.</td></tr>';
+document.getElementById('stt').hidden=!n;document.getElementById('swt').hidden=!!ss.value||!SW.length;
+document.querySelectorAll('#ts tr.sr').forEach(t=>t.onclick=()=>{const d=t.nextElementSibling;d.hidden=!d.hidden});
+{const no=document.getElementById('snote');no.dataset.t=n&&!miss?'Kliknutím na řádek zobrazíte stornované položky.':'';no.textContent=miss?'Pro některé dny report neobsahuje údaje o stornech (vytvořeno starší verzí).':(document.getElementById('ts').classList.contains('zb')?'':no.dataset.t);}
+}
+A.onchange=B.onchange=document.getElementById('q').oninput=render;
+document.getElementById('wsel').onchange=document.getElementById('ssel').onchange=document.getElementById('wq').oninput=render;
+document.getElementById('gsel').onchange=render;document.getElementById('gmb').onclick=()=>{showGM=!showGM;render()};
+{const b=document.getElementById('wqb'),q=document.getElementById('wq');b.onclick=()=>{q.hidden=!q.hidden;b.setAttribute('aria-expanded',!q.hidden);b.textContent=q.hidden?'Hledat položku':'Zavřít hledání';if(q.hidden){if(q.value){q.value='';render()}}else q.focus()};q.onkeydown=e=>{if(e.key==='Escape')b.click()}}{const b=document.getElementById('oqb'),q=document.getElementById('oq');b.onclick=()=>{q.hidden=!q.hidden;b.setAttribute('aria-expanded',!q.hidden);b.textContent=q.hidden?'Hledat položku':'Zavřít hledání';if(q.hidden){if(q.value){q.value='';renderOb(OBDS)}}else q.focus()};q.oninput=()=>renderOb(OBDS);q.onkeydown=e=>{if(e.key==='Escape')b.click()}}document.getElementById('mw').onclick=e=>{e.preventDefault();showW=!showW;render()};
+document.getElementById('mo').onclick=e=>{e.preventDefault();showAll=!showAll;render()};
+Chart.defaults.animation=false;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fd2=d=>d.slice(6)+'. '+d.slice(4,6)+'. '+d.slice(0,4);
+const m2=n=>(Math.round(n*100)/100).toLocaleString('cs-CZ',{minimumFractionDigits:2,maximumFractionDigits:2});
+function pr(land,vcMode){
+ let st=document.getElementById('pg');if(!st){st=document.createElement('style');st.id='pg';document.head.appendChild(st)}
+ st.textContent='@page{size:A4 '+(land?'landscape':'portrait')+';margin:10mm}';
+ const had=document.documentElement.dataset.theme;document.documentElement.dataset.theme='light';
+ if(vcMode)document.body.classList.add('vcp');render();
+ const back=()=>{window.removeEventListener('afterprint',back);if(had)document.documentElement.dataset.theme=had;else delete document.documentElement.dataset.theme;document.body.classList.remove('vcp');render()};
+ window.addEventListener('afterprint',back);setTimeout(()=>window.print(),250)}
+function openVc(){
+ if(A.value!==B.value){alert('Výčetku lze vygenerovat jen za jeden den – nastavte Od i Do na stejné datum.');return}
+ const ds=[A.value];
+ const S=ds.map(d=>DATA.days[d]),tp={},cn={};
+ S.forEach(x=>{for(const k in x.p){const t=pk(k);tp[t]=(tp[t]||0)+x.p[k]}for(const k in (x.pn||{})){const t=pk(k);cn[t]=(cn[t]||0)+x.pn[k]}});
+ const T=Object.keys(tp).sort((a,b)=>tp[b]-tp[a]),tot=T.reduce((s,k)=>s+tp[k],0)||1,cnt=T.reduce((s,k)=>s+(cn[k]||0),0);
+ let h='<div class="doc"><h1>Výčetka tržeb podle typu platby</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · den '+fd2(ds[0])+' · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>';
+ h+='<table><tr><th>Typ platby</th><th>Počet plateb</th><th>Částka (Kč)</th><th>Podíl</th></tr>'+T.map(k=>`<tr><td>${esc(k)}</td><td>${cn[k]||0}</td><td>${m2(tp[k])}</td><td>${(100*tp[k]/tot).toFixed(1)} %</td></tr>`).join('')+`<tr class="tl"><td>Celkem</td><td>${cnt}</td><td>${m2(tot)}</td><td>100 %</td></tr></table>`;
+ if(ds.length>1){h+='<div class="mu">Rozpis po dnech (Kč)</div><div class="dw"><table><tr><th>Datum</th>'+T.map(k=>`<th>${esc(k)}</th>`).join('')+'<th>Celkem</th></tr>'+ds.map((d,i)=>{const x=agg(S[i].p);return `<tr><td>${fd2(d)}</td>`+T.map(k=>`<td>${x[k]?m2(x[k]):'–'}</td>`).join('')+`<td>${m2(T.reduce((s,k)=>s+(x[k]||0),0))}</td></tr>`}).join('')+'<tr class="tl"><td>Celkem</td>'+T.map(k=>`<td>${m2(tp[k])}</td>`).join('')+`<td>${m2(tot)}</td></tr></table></div>`}
+ h+='<div class="mu">Částky odpovídají platbám po odečtení storen a vratek.</div><div class="sg"><div>Vyúčtoval (jméno, podpis)</div><div>Převzal (jméno, podpis)</div></div></div>';
+ const vc=document.getElementById('vc');vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="vcx">Zavřít</button></div>'+h;vc.hidden=false;
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('vcp').onclick=()=>pr(false,true)}
+
+// ---------- Export prodeje po položkách do PDF (výběr skupin) ----------
+function ipData(w){const S=sel(),it=w?(giCtx.wi[w]||{}):sum(S,'i',(o,k,v)=>{o[k]=o[k]||[0,0];o[k][0]+=v[0];o[k][1]+=v[1]}),G={};
+ const hasP=S.every(x=>!x.i||!Object.keys(x.i).length||x.ip),P={};// tržba před slevou (ceník × ks); starší data z PDF ji nemají
+ S.forEach(x=>{const o=w?(x.wip&&x.wip[w]):x.ip;if(o)for(const k in o)P[k]=(P[k]||0)+o[k]});
+ for(const k in it){const g=DATA.grp[k]||'bez skupiny';(G[g]=G[g]||{n:0,t:0,p:0,L:[]});G[g].t+=it[k][1];G[g].n+=it[k][0];G[g].p+=P[k]||0;G[g].L.push([String(DATA.names[k]||k).replace(/\s{2,}/g,' ').trim(),it[k][0],it[k][1],k,P[k]||0])}
+ Object.defineProperty(G,'hasP',{value:hasP,enumerable:false});return G}
+let ipSel=null,ipW='';
+function openIp(w){w=typeof w==='string'?w:'';ipW=w;
+ const G=ipData(w),GN=Object.keys(G).sort((a,b)=>G[b].t-G[a].t),vc=document.getElementById('vc');
+ if(!GN.length){alert('Ve zvoleném období nejsou žádné položky.');return}
+ const per=A.value===B.value?'den '+fd2(A.value):fd2(A.value)+' – '+fd2(B.value);
+ vc.innerHTML='<div class="acts"><button class="btn" id="ipgo">Vytvořit PDF</button><button class="btn" id="vcx">Zavřít</button></div><div class="doc"><h1>Export prodeje po položkách</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+per+(w?' · číšník: '+esc(w):'')+'</div>'+
+  '<p>Vyberte skupiny, které chcete exportovat:</p><div class="gx"><button class="btn" id="ipall">Vybrat vše</button><button class="btn" id="ipnone">Zrušit výběr</button></div>'+
+  '<div class="gsel">'+GN.map(g=>`<label><input type="checkbox" value="${esc(g)}"${!ipSel||ipSel.has(g)?' checked':''}> ${esc(g)}<span>${fm(G[g].t)}</span></label>`).join('')+'</div>'+
+  '<div class="gx"><button class="btn" id="ipgo2" style="background:#2d5a3d;color:#fff;border-color:#2d5a3d">Vytvořit PDF</button></div></div>';
+ vc.hidden=false;
+ const cbs=()=>[...vc.querySelectorAll('.gsel input')];
+ document.getElementById('ipall').onclick=()=>cbs().forEach(c=>c.checked=true);
+ document.getElementById('ipnone').onclick=()=>cbs().forEach(c=>c.checked=false);
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};
+ const go=()=>{const ch=cbs().filter(c=>c.checked).map(c=>c.value);if(!ch.length){alert('Vyberte alespoň jednu skupinu.');return}ipSel=new Set(ch);ipDoc(G,GN.filter(g=>ipSel.has(g)),per+(w?' · číšník: '+w:''))};
+ document.getElementById('ipgo').onclick=go;document.getElementById('ipgo2').onclick=go}
+function ipDoc(G,GN,per){
+ const vc=document.getElementById('vc'),tot=GN.reduce((s,g)=>s+G[g].t,0),ks=GN.reduce((s,g)=>s+G[g].n,0),r1=n=>Math.round(n*10)/10;
+ let h='<div class="doc"><h1>Prodej po položkách</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+per+' · skupiny: '+GN.map(esc).join(', ')+' · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>';
+ const hp=G.hasP,pd=(p,t)=>hp?m2(p):'–',sd=(p,t)=>hp?m2(p-t):'–';
+ h+='<table class="dr"><tr><th>Položka</th><th>Ks</th><th>Před slevou (Kč)</th><th>Sleva (Kč)</th><th>Tržba (Kč)</th><th>Podíl ve skupině</th></tr>';
+ GN.forEach(g=>{const x=G[g],L=x.L.slice().sort((a,b)=>b[2]-a[2]);
+  h+=`<tr class="ds"><td colspan="6">${esc(g)}</td></tr>`+L.map(r=>`<tr><td>${esc(r[0])}</td><td>${r1(r[1]).toLocaleString('cs-CZ')}</td><td>${pd(r[4],r[2])}</td><td></td><td>${m2(r[2])}</td><td>${x.t?(100*r[2]/x.t).toFixed(1)+' %':'–'}</td></tr>`).join('')+
+   `<tr class="tl"><td>Celkem ${esc(g)}</td><td>${r1(x.n).toLocaleString('cs-CZ')}</td><td>${pd(x.p,x.t)}</td><td>${sd(x.p,x.t)}</td><td>${m2(x.t)}</td><td>${tot?(100*x.t/tot).toFixed(1)+' % z výběru':''}</td></tr><tr class="de"><td colspan="6"></td></tr>`});
+ const pt=GN.reduce((s,g)=>s+G[g].p,0);h+=`<tr class="tl"><td>Celkem za vybrané skupiny</td><td>${r1(ks).toLocaleString('cs-CZ')}</td><td>${pd(pt,tot)}</td><td>${sd(pt,tot)}</td><td>${m2(tot)}</td><td></td></tr></table><div class="mu">Částky jsou po odečtení storen a vratek, slevy jsou rozpuštěny do položek.</div></div>`;
+ vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="ipbk">← Změnit skupiny</button><button class="btn" id="vcx">Zavřít</button></div>'+h;vc.hidden=false;
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('ipbk').onclick=()=>openIp(ipW);document.getElementById('vcp').onclick=()=>pr(false,true)}
+document.getElementById('ipdf').onclick=()=>openIp('');
+// ---------- Prodej položek po skupinách (karta dole; export do PDF = stejný výběr skupin jako „Export do PDF“ u Prodeje po položkách) ----------
+let giOpen=new Set(),giAll=false;
+function renderGi(){const w=document.getElementById('gsel').value,G=ipData(w),hp=G.hasP,GN=Object.keys(G).sort((a,b)=>G[b].t-G[a].t),tot=GN.reduce((s,g)=>s+G[g].t,0),r1=n=>Math.round(n*10)/10,mx=Math.max(...GN.map(g=>G[g].t),1),gr=giCtx.gr;
+ const ia={};if(w){const IA=ipData('');for(const g in IA)IA[g].L.forEach(r=>ia[r[3]]=r[2])}
+ document.getElementById('tgh').textContent='Prodej po skupinách'+(w?' – '+w:'');
+ const b=document.getElementById('gie');b.textContent=giAll?'Sbalit skupiny':'Rozbalit skupiny';b.setAttribute('aria-expanded',giAll);
+ const pc=(a,c)=>c?(100*a/c).toFixed(1)+' %':'–',pf=p=>hp?fm(p):'–',sf=(p,t)=>{if(!hp)return'–';const d=p-t;return Math.abs(d)<0.5?'–':fm(d)+(Math.abs(p)>=0.5?` <span class="sub">${(100*d/p).toFixed(0)} %</span>`:'')};
+ const pt=GN.reduce((s,g)=>s+G[g].p,0);
+ document.getElementById('tgi').innerHTML=GN.length?'<tr><th>Skupina / položka</th><th>Ks</th><th title="Tržba v ceníkových cenách (ks × cena)">Před slevou</th><th title="Sleva = tržba před slevou − tržba po slevě">Sleva</th><th>Tržba</th><th>Podíl</th>'+(w?'<th title="Kolik z celkové tržby skupiny / položky prodal tento číšník">Podíl na skupině</th>':'')+'</tr>'+GN.map(g=>{const o=giAll||giOpen.has(g),L=G[g].L.filter(r=>Math.abs(r[1])>=0.05||Math.abs(r[2])>=0.5||Math.abs(r[4])>=0.5).sort((a,b)=>b[2]-a[2]);
+  return `<tr class="gih" data-g="${esc(g)}"><td>${o?'▾':'▸'} ${esc(g)} <span class="sub" style="font-weight:400">(${L.length})</span></td><td>${r1(G[g].n)}</td><td>${pf(G[g].p)}</td><td>${sf(G[g].p,G[g].t)}</td><td>${fm(G[g].t)}<span class="bg" style="width:${80*Math.max(G[g].t,0)/mx}px"></span></td><td>${pc(G[g].t,tot)}</td>${w?`<td>${pc(G[g].t,gr[g]&&gr[g][1])}</td>`:''}</tr>`+(o?L.map(r=>`<tr class="gii"><td>${esc(r[0])}</td><td>${r1(r[1])}</td><td>${pf(r[4])}</td><td></td><td>${fm(r[2])}</td><td>${pc(r[2],G[g].t)}</td>${w?`<td>${pc(r[2],ia[r[3]])}</td>`:''}</tr>`).join(''):'')}).join('')+`<tr><td><b>Celkem</b></td><td><b>${r1(GN.reduce((s,g)=>s+G[g].n,0))}</b></td><td><b>${pf(pt)}</b></td><td><b>${sf(pt,tot)}</b></td><td><b>${fm(tot)}</b></td><td></td>${w?'<td></td>':''}</tr>`:'<tr><td class="sub">Ve zvoleném období nejsou žádné položky.</td></tr>';
+ document.getElementById('ginote').textContent=hp?'':'Pro část zvoleného období nejsou k dispozici ceny před slevou (starší data), proto se tržba před slevou a sleva nezobrazují.';
+ document.querySelectorAll('#tgi tr.gih').forEach(t=>t.onclick=()=>{const g=t.dataset.g;if(giAll){giAll=false;giOpen=new Set(GN)}giOpen.has(g)?giOpen.delete(g):giOpen.add(g);renderGi()})}
+document.getElementById('gie').onclick=()=>{giAll=!giAll;giOpen=new Set();renderGi()};document.getElementById('gipdf').onclick=()=>openIp(document.getElementById('gsel').value);
+// ---------- Export Personální strava (konzumační karta úvěrová po držitelích, s položkami) ----------
+let psIt=true;
+function openPs(){
+ const ds=days.filter(d=>d>=A.value&&d<=B.value),H={};let miss=0;
+ ds.forEach(d=>{const x=DATA.days[d];for(const k in x.p){const id=PS(k);if(id===null)continue;const o=H[id]=H[id]||{t:0,i:{},m:0};o.t+=x.p[k];
+  const ki=x.ki&&x.ki[k];if(ki){for(const c in ki){const a=o.i[c]=o.i[c]||[0,0];a[0]+=ki[c][0];a[1]+=ki[c][1]}}else if(Math.abs(x.p[k])>=0.5){o.m=1;miss=1}}});
+ const R=Object.entries(H).filter(([,o])=>Math.round(o.t)||Object.values(o.i).some(a=>Math.abs(a[0])>=0.05)).map(([k,o])=>{const [n,j]=k.split('|');return{n,j,...o}}).sort((a,b)=>(a.j||'').localeCompare(b.j||'','cs')||a.n.localeCompare(b.n,'cs'));
+ if(!R.length){alert(HASUV?'Ve zvoleném období nejsou žádné platby konzumační kartou úvěrovou.':'Ve zvoleném období nejsou žádné platby konzumační kartou, kartou faktura ani personální stravou.');return}
+ const per=A.value===B.value?'den '+fd2(A.value):fd2(A.value)+' – '+fd2(B.value),tot=R.reduce((s,r)=>s+r.t,0),r1=n=>(Math.round(n*10)/10).toLocaleString('cs-CZ');
+ let h='<div class="doc"><h1>Personální strava</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+(HASUV?' · konzumační karta úvěrová · ':' · konzumační karty, karty faktura a personální strava · ')+per+' · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>';
+ h+='<div class="psopt np"><label style="display:flex;gap:6px;align-items:center;cursor:pointer"><input type="checkbox" id="psi"'+(psIt?' checked':'')+'> Zobrazit položky</label></div>';
+ R.forEach(r=>{const L=Object.entries(r.i).filter(([,a])=>Math.abs(a[1])>=0.5||(!HASUV&&Math.abs(a[0])>=0.05)).map(([c,a])=>[String(DATA.names[c]||c).replace(/\s{2,}/g,' ').trim(),a[0],a[1]]).sort((a,b)=>a[0].localeCompare(b[0],'cs'));
+  h+=`<div class="ps"><div class="ph"><span>${esc(r.j||'(bez jména)')} ${r.n?`<span class="mu">· karta ${esc(r.n)}</span>`:''}</span><span>${m2(r.t)} Kč</span></div>`+
+   (psIt&&L.length?'<div class="pi">'+L.map(l=>`<div><span>${r1(l[1])}×</span><span>${esc(l[0])}</span><span>${m2(l[2])}</span></div>`).join('')+'</div>':'')+
+   (psIt&&r.m?'<div class="mu" style="font-size:10px">Položky za část období nejsou k dispozici.</div>':'')+'</div>'});
+ h+=`<div class="pst"><span>Celkem ${R.length} ${R.length===1?'držitel':R.length<5?'držitelé':'držitelů'}</span><span>${m2(tot)} Kč</span></div><div class="mu" style="margin-top:6px">Částky jsou po odečtení storen, slevy jsou rozpuštěny do položek; u účtů placených částečně kartou je započten jen podíl placený kartou.</div></div>`;
+ const vc=document.getElementById('vc');vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="vcx">Zavřít</button></div>'+h;vc.hidden=false;vc.scrollTop=0;
+ document.getElementById('psi').onchange=e=>{psIt=e.target.checked;openPs()};
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('vcp').onclick=()=>pr(false,true)}
+document.getElementById('psb').onclick=openPs;
+document.querySelectorAll('.cl .wtg').forEach(h=>h.onclick=()=>{const c=h.closest('.cl'),o=c.classList.toggle('open');h.querySelector('.chv').textContent=o?'▾':'▸'});// karty „Prodej položek po číšnících“ a „Prodej po položkách“ jsou ve výchozím stavu sbalené
+
+document.getElementById('pdf').onclick=()=>pr(false,false);document.getElementById('vcb').onclick=openVc;
+function upVc(){const one=A.value===B.value;document.getElementById('vcb').disabled=!one;document.getElementById('vch').textContent=one?'':'dostupná jen pro jeden den (Od = Do)'}
+A.addEventListener('change',upVc);B.addEventListener('change',upVc);upVc();
+{const t=new Date();t.setDate(t.getDate()-1);const yd=''+t.getFullYear()+String(t.getMonth()+1).padStart(2,'0')+String(t.getDate()).padStart(2,'0'),vb=document.getElementById('vcr');
+ if(DATA.days[yd]){const tv='Zobrazí údaje za '+fd(yd)+' '+t.getFullYear();let prev=null;vb.title=tv;
+  const setL=()=>{const on=prev&&A.value===yd&&B.value===yd;if(!on)prev=null;vb.textContent=on?'Zpět':'Včera';vb.title=on?'Vrátí předchozí výběr období':tv};
+  vb.onclick=()=>{if(prev){A.value=prev[0];B.value=prev[1];prev=null}else{prev=[A.value,B.value];A.value=B.value=yd}A.dispatchEvent(new Event('change'));setL()};
+  A.addEventListener('change',setL);B.addEventListener('change',setL)}
+ else{vb.disabled=true;vb.title='Za včerejší den ('+fd(yd)+' '+t.getFullYear()+') nejsou v tomto reportu data'}}
+// ---------- Report po dnech (oběd / večeře × kuchyně / bar / ostatní) + export do Excelu ----------
+const DENNI=(/*DENNI*/0),DOB=16;// oběd = 5:00–15:59, večeře = zbytek dne (vč. po půlnoci) – stejně jako graf „Tržba po hodinách“
+function drRows(ds,sel){// sel = vybrané typy plateb (null = všechny)
+ const cat=c=>{const l=STN[c]||({'41':'Kuchyně','51':'Bar','42':'Bar'}[c]||'');return /^kuch/i.test(l)?0:/^bar/i.test(l)?1:2},ob=h=>+h>=5&&+h<DOB,DPH=DATA.dph||{};
+ const V=ds.map(d=>{const x=DATA.days[d],o={o:[0,0,0],v:[0,0,0],go:0,gv:0,bd:0};
+  if(sel){for(const l of sel){const K=(x.khp||{})[l]||{},G=(x.ghp||{})[l]||{};for(const h in K)for(const c in K[h])(ob(h)?o.o:o.v)[cat(c)]+=K[h][c];for(const h in G)ob(h)?(o.go+=G[h]):(o.gv+=G[h])}
+   const t=o.o[0]+o.o[1]+o.o[2]+o.v[0]+o.v[1]+o.v[2];if(x.pd){let g=0,dd=0;for(const l of sel)for(const z in (x.pd[l]||{})){g+=x.pd[l][z][0];dd+=x.pd[l][z][1]}o.bd=Math.abs(g)>0.005?t*(g-dd)/g:t}else{let gi=0,ni=0;for(const c in x.i){const v=x.i[c][1];gi+=v;ni+=v/(DPH[c]||1.21)}o.bd=Math.abs(gi)>0.005?t*ni/gi:t}return o}
+  for(const h in (x.kh||{}))for(const c in x.kh[h])(ob(h)?o.o:o.v)[cat(c)]+=x.kh[h][c];
+  for(const h in (x.gh||{}))ob(h)?(o.go+=x.gh[h]):(o.gv+=x.gh[h]);
+  let gi=0,ni=0;for(const c in x.i){const v=x.i[c][1];gi+=v;ni+=v/(DPH[c]||1.21)}
+  const t=o.o[0]+o.o[1]+o.o[2]+o.v[0]+o.v[1]+o.v[2];o.bd=Math.abs(gi)>0.005?t*ni/gi:t;return o});
+ const r=(l,f,b)=>({l,v:V.map(f),b}),blk=k=>[r('Tržba kuchyně',o=>o[k][0]),r('Tržba bar',o=>o[k][1]),r('Tržba ostatní',o=>o[k][2]),r('Tržba celkem',o=>o[k][0]+o[k][1]+o[k][2],1)];
+ const c=i=>o=>o.o[i]+o.v[i];
+ return [{s:'Obědy'},...blk('o'),r('Počet hostů',o=>o.go),{e:1},{s:'Večeře'},...blk('v'),r('Počet hostů',o=>o.gv),{e:1},{s:'CELKEM'},
+  r('Tržba kuchyně',c(0)),r('Tržba bar',c(1)),r('Tržba ostatní',c(2)),r('Tržba celkem',o=>c(0)(o)+c(1)(o)+c(2)(o),1),r('Tržba celkem bez DPH',o=>o.bd,1),r('Počet hostů',o=>o.go+o.gv,1)];
+}
+function drHead(ds){const m=new Set(ds.map(d=>d.slice(0,6))).size>1;return ds.map(d=>m?fd(d):String(+d.slice(6)))}
+let drSel=null;
+function openDr(){// dotaz na typy plateb před vytvořením reportu po dnech
+ const ds=days.filter(d=>d>=A.value&&d<=B.value),P={};ds.forEach(d=>{const p=DATA.days[d].p||{};for(const l in p)P[l]=(P[l]||0)+p[l]});
+ const PL=Object.keys(P).filter(l=>Math.abs(P[l])>=0.5).sort((a,b)=>P[b]-P[a]);if(PL.length<2){genDr(ds,null);return}
+ const per=A.value===B.value?'den '+fd2(A.value):fd2(A.value)+' – '+fd2(B.value),vc=document.getElementById('vc');
+ vc.innerHTML='<div class="acts"><button class="btn" id="drgo">Generovat report</button><button class="btn" id="vcz">Zavřít</button></div><div class="doc"><h1>Report po dnech</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+per+'</div>'+
+  '<p>Vyberte typy plateb, které se mají do reportu započítat:</p><div class="gx"><button class="btn" id="drall">Vybrat vše</button><button class="btn" id="drnone">Zrušit výběr</button></div>'+
+  '<div class="gsel">'+PL.map(l=>`<label><input type="checkbox" value="${esc(l)}"${!drSel||drSel.has(l)?' checked':''}> ${esc(l)}<span>${fm(P[l])}</span></label>`).join('')+'</div>'+
+  '<div class="gx"><button class="btn" id="drgo2" style="background:#2d5a3d;color:#fff;border-color:#2d5a3d">Generovat report</button></div></div>';
+ vc.hidden=false;vc.scrollTop=0;const cbs=()=>[...vc.querySelectorAll('.gsel input')];
+ document.getElementById('drall').onclick=()=>cbs().forEach(c=>c.checked=true);document.getElementById('drnone').onclick=()=>cbs().forEach(c=>c.checked=false);
+ document.getElementById('vcz').onclick=()=>{vc.hidden=true};
+ document.getElementById('drgo').onclick=document.getElementById('drgo2').onclick=()=>{const S=cbs().filter(c=>c.checked).map(c=>c.value);if(!S.length){alert('Vyberte alespoň jeden typ platby.');return}
+  drSel=S.length===PL.length?null:new Set(S);genDr(ds,drSel?S:null)}}
+function genDr(ds,sel){
+ const R=drRows(ds,sel),H=drHead(ds),miss=ds.filter(d=>!DATA.days[d].kh||(sel&&!DATA.days[d].khp));
+ const n=v=>Math.round(v).toLocaleString('cs-CZ'),cols=ds.length+2;
+ let h='<div class="doc drp"><h1>Report po dnech</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+' · '+fd2(ds[0])+' – '+fd2(ds.at(-1))+' · oběd do '+DOB+':00, večeře od '+DOB+':00 · vygenerováno '+new Date().toLocaleString('cs-CZ')+'</div>'+(sel?'<div class="mu"><b>Typy plateb:</b> '+sel.map(esc).join(', ')+'</div>':'');
+ if(miss.length)h+='<p style="color:#b00">Pro '+miss.length+' dní chybí data po hodinách a střediscích (report byl vytvořen starší verzí) – tyto dny jsou nulové.'+(sel?' Report podle typu platby vyžaduje nové zpracování exportu.':'')+'</p>';
+ h+='<div class="dw"><table class="dr"><tr><th>Skupina / den</th>'+H.map(x=>`<th>${x}</th>`).join('')+'<th>Celkem</th></tr>'+R.map(x=>x.s?`<tr class="ds"><td colspan="${cols}">${x.s}</td></tr>`:x.e?`<tr class="de"><td colspan="${cols}"></td></tr>`:`<tr${x.b?' class="tl"':''}><td>${x.l}</td>${x.v.map(v=>`<td>${n(v)}</td>`).join('')}<td><b>${n(x.v.reduce((a,b)=>a+b,0))}</b></td></tr>`).join('')+'</table></div>';
+ h+='<div class="mu">Tržba bez DPH je přepočtena podle sazeb DPH prodaných položek. Částky jsou po slevách a stornech.'+(sel?' U účtů placených více typy plateb se tržba i hosté dělí podle podílu platby.':'')+'</div></div>';
+ const vc=document.getElementById('vc');vc.innerHTML='<div class="acts"><button class="btn" id="drx">Uložit do Excelu</button><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="drmail" title="Odešle report jako PDF e-mailem přes onlinereport.cz">Odeslat e-mailem</button><button class="btn" id="vcz">Zavřít</button></div><div class="acts" id="mrmn" hidden style="background:#fff;color:#111;border-radius:8px;padding:10px 12px;font-size:14px"></div>'+h;vc.hidden=false;
+ document.getElementById('drmail').onclick=()=>{const nm=document.querySelector('h1').textContent.trim(),per=fd2(ds[0])+' – '+fd2(ds.at(-1)),tot=R.find(x=>x.b&&/celkem/i.test(x.l||''));
+  mrMail({co:'report po dnech',fn:('Report po dnech '+nm+' '+ds[0]+'-'+ds.at(-1)).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.-]+/g,'_')+'.pdf',subj:'Report po dnech – '+nm+', '+per,
+   txt:'Dobrý den,\n\nv příloze posílám report po dnech '+nm+' za období '+per+'.\n'+(sel?'Typy plateb: '+sel.join(', ')+'\n':'')},'#vc .doc.drp','landscape')};
+ document.getElementById('vcz').onclick=()=>{vc.hidden=true};document.getElementById('vcp').onclick=()=>pr(true,true);
+ document.getElementById('drx').onclick=()=>drXlsx(ds,R,H,sel);
+}
+// minimální zápis .xlsx (ZIP bez komprese) – bez externích knihoven
+function drXlsx(ds,R,H,sel){
+ const X=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const cl=i=>{let s='';i++;while(i){const m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=(i-1-m)/26}return s};
+ const str=(r,c,t,st)=>`<c r="${cl(c)}${r}" t="inlineStr" s="${st}"><is><t>${X(t)}</t></is></c>`,num=(r,c,v,st)=>`<c r="${cl(c)}${r}" s="${st}"><v>${Math.round(v*100)/100}</v></c>`;
+ const last=ds.length+1;let rows=[],ri=1;
+ const t=document.querySelector('h1').textContent;
+ rows.push(`<row r="${ri}">${str(ri,0,t+' – report po dnech ('+fd2(ds[0])+' – '+fd2(ds.at(-1))+')'+(sel?' – platby: '+sel.join(', '):''),3)}</row>`);ri+=2;
+ rows.push(`<row r="${ri}">${str(ri,0,'Skupina / den',5)}${H.map((x,i)=>/^\d+$/.test(x)?num(ri,i+1,+x,5):str(ri,i+1,x,5)).join('')}${str(ri,last,'Celkem',5)}</row>`);ri++;
+ for(const x of R){
+  if(x.s)rows.push(`<row r="${ri}">${str(ri,0,x.s,4)}</row>`);
+  else if(!x.e){const f=`SUM(${cl(1)}${ri}:${cl(ds.length)}${ri})`,tot=x.v.reduce((a,b)=>a+b,0);
+   rows.push(`<row r="${ri}">${str(ri,0,x.l,x.b?3:0)}${x.v.map((v,i)=>num(ri,i+1,v,x.b?2:1)).join('')}<c r="${cl(last)}${ri}" s="2"><f>${f}</f><v>${Math.round(tot*100)/100}</v></c></row>`)}
+  ri++}
+ const sheet=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane xSplit="1" ySplit="3" topLeftCell="B4" activePane="bottomRight" state="frozen"/></sheetView></sheetViews><cols><col min="1" max="1" width="24" customWidth="1"/><col min="2" max="${last}" width="10.5" customWidth="1"/><col min="${last+1}" max="${last+1}" width="12.5" customWidth="1"/></cols><sheetData>${rows.join('')}</sheetData><pageSetup orientation="landscape" fitToWidth="1" fitToHeight="0"/></worksheet>`;
+ const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="#,##0"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="6"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment horizontal="center"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+ const F={'[Content_Types].xml':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>',
+  '_rels/.rels':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>',
+  'xl/workbook.xml':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Po dnech" sheetId="1" r:id="rId1"/></sheets></workbook>',
+  'xl/_rels/workbook.xml.rels':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
+  'xl/worksheets/sheet1.xml':sheet,'xl/styles.xml':styles};
+ const blob=new Blob([zipStore(F)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download=(t.replace(/[\\/:*?"<>|]+/g,'-')+' – po dnech '+ds[0].slice(6)+'-'+ds.at(-1).slice(6)+'.xlsx');document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
+function zipStore(F){
+ const enc=new TextEncoder(),T=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;T[n]=c>>>0}
+ const crc=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=T[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0};
+ const parts=[],cen=[];let off=0;
+ const hd=(n,f)=>{const b=new DataView(new ArrayBuffer(n));f(b);return new Uint8Array(b.buffer)};
+ for(const name in F){const nm=enc.encode(name),d=enc.encode(F[name]),c=crc(d);
+  const lh=hd(30,v=>{v.setUint32(0,0x04034b50,1);v.setUint16(4,20,1);v.setUint16(6,0x800,1);v.setUint16(12,0x21,1);v.setUint32(14,c,1);v.setUint32(18,d.length,1);v.setUint32(22,d.length,1);v.setUint16(26,nm.length,1)});
+  const ch=hd(46,v=>{v.setUint32(0,0x02014b50,1);v.setUint16(4,20,1);v.setUint16(6,20,1);v.setUint16(8,0x800,1);v.setUint16(14,0x21,1);v.setUint32(16,c,1);v.setUint32(20,d.length,1);v.setUint32(24,d.length,1);v.setUint16(28,nm.length,1);v.setUint32(42,off,1)});
+  parts.push(lh,nm,d);cen.push(ch,nm);off+=30+nm.length+d.length}
+ const cs=cen.reduce((s,b)=>s+b.length,0),n=Object.keys(F).length;
+ const end=hd(22,v=>{v.setUint32(0,0x06054b50,1);v.setUint16(8,n,1);v.setUint16(10,n,1);v.setUint32(12,cs,1);v.setUint32(16,off,1)});
+ return new Blob([...parts,...cen,end]);
+}
+if(DENNI){const b=document.getElementById('drb');b.hidden=false;b.onclick=openDr}
+// ---------- Měsíční reporty: Tržby po platbách / po DPH / po dnech ----------
+// DPH a základ jsou součtem hodnot spočítaných při zpracování exportu za každý účet (sazba po sazbě, zaokrouhleno na haléře) – v šabloně se nic neodhaduje.
+const MESICNI=(/*MESICNI*/0),KOEF=(/*KOEF*/0);// KOEF = přepočet platby Hotově koeficientem (jen restaurace z koeficient.json, jen pro správce)
+function payRates(x){// {typ platby: {sazba: [tržba, DPH]}} za den, nebo null když den nemá uložený rozpis z účtů
+ if(!x.pd)return null;const o={};
+ for(const k in x.pd){const t=pk(k),a=o[t]=o[t]||{};for(const s in x.pd[k]){const v=x.pd[k][s],b=a[s]=a[s]||[0,0];b[0]+=v[0];b[1]+=v[1]}}
+ return o}
+let mrCfg=null;
+function mrMonths(){return [...new Set(days.map(d=>d.slice(0,6)))].sort().reverse()}
+const MNs=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'],mnm=m=>MNs[+m.slice(4)-1]+' '+m.slice(0,4);
+const mrDays=m=>m==='*'?days.filter(d=>d>=A.value&&d<=B.value):days.filter(d=>d.startsWith(m));
+function openMr(){
+ const vc=document.getElementById('vc'),MO=mrMonths();
+ const cur=A.value.slice(0,6)===B.value.slice(0,6)?A.value.slice(0,6):'*';
+ const per=mrCfg&&MO.includes(mrCfg.m)?mrCfg.m:cur;
+ const draw=()=>{const ds=mrDays(document.getElementById('mrm').value),tp={};
+  ds.forEach(d=>{const a=agg(DATA.days[d].p);for(const t in a)tp[t]=(tp[t]||0)+a[t]});
+  const T=Object.keys(tp).filter(t=>Math.abs(tp[t])>=0.005).sort((a,b)=>tp[b]-tp[a]),miss=ds.filter(d=>!DATA.days[d].pd);
+  document.getElementById('mrp').innerHTML=T.map(t=>`<label><input type="checkbox" value="${esc(t)}"${!mrCfg||!mrCfg.x.has(t)?' checked':''}> ${esc(t)}<span>${fm(tp[t])}</span></label>`).join('')||'<span class="mu">Žádné platby.</span>';
+  const kt=document.getElementById('mrkt');if(kt){const H=T.filter(t=>/^hotov/i.test(t));kt.innerHTML=H.map(t=>`<label><input type="checkbox" value="${esc(t)}"${(mrCfg&&mrCfg.kt?mrCfg.kt.has(t):/^hotov[eě](\s*kč)?$/i.test(t))?' checked':''}> ${esc(t)}<span>${fm(tp[t])}</span></label>`).join('')||'<span class="mu">V tomto období není platba Hotově.</span>'}
+  mrKPrev();
+  const w=document.getElementById('mrw');w.hidden=!miss.length;w.innerHTML=miss.length?`<b>Pro ${miss.length} ${miss.length===1?'den':miss.length<5?'dny':'dní'} (${miss.slice(0,6).map(fd2).join(', ')}${miss.length>6?', …':''}) nejsou uložené údaje o DPH z jednotlivých účtů.</b> Reporty pro toto období nelze vytvořit přesně – je potřeba znovu zpracovat export z pokladny za tyto dny.`:''};
+ vc.innerHTML='<div class="acts"><button class="btn" id="mrgo">Vytvořit reporty</button><button class="btn" id="vcx">Zavřít</button></div><div class="doc"><h1>Měsíční reporty</h1><div class="mu">'+esc(document.querySelector('h1').textContent)+'</div>'+
+  '<p><label>Období <select id="mrm">'+MO.map(m=>`<option value="${m}">${mnm(m)}</option>`).join('')+`<option value="*">vybrané Od–Do (${fd2(A.value)} – ${fd2(B.value)})</option></select></label></p>`+
+  '<div id="mrw" class="mrwarn" hidden></div>'+
+  '<p style="margin-bottom:4px"><b>Reporty</b></p><div class="gsel" id="mrr">'+[['p','Tržby po platbách'],['d','Tržby po DPH'],['u','Tržby po dnech']].map(([k,n])=>`<label><input type="checkbox" value="${k}"${!mrCfg||mrCfg.r.has(k)?' checked':''}> ${n}</label>`).join('')+'</div>'+
+  '<p style="margin-bottom:4px"><b>Typy plateb uvedené v reportech</b></p><div class="gx"><button class="btn" id="mrall">Vybrat vše</button><button class="btn" id="mrnone">Zrušit výběr</button></div><div class="gsel" id="mrp"></div>'+
+  (window.OR_ADMIN&&KOEF?'<div id="mrk" style="margin-top:12px;padding:10px 12px;border:1px dashed #b9770e;border-radius:8px"><p style="margin:0 0 6px"><b>Přepočet platby</b> <span class="mu">(vidí jen správce)</span></p>'+
+   '<label>Koeficient <input id="mrkk" type="number" step="0.01" min="0" style="width:90px" value="'+(mrCfg&&mrCfg.k!=null?mrCfg.k:1)+'"></label> <span class="mu">– částky (tržba, základ i DPH) vybraných typů plateb se v reportech vynásobí koeficientem; 1 = beze změny</span>'+
+   '<div class="gsel" id="mrkt" style="margin-top:6px"></div><div id="mrkp" style="margin-top:8px"></div></div>':'')+
+  '<div class="gx"><button class="btn" id="mrgo2" style="background:#2d5a3d;color:#fff;border-color:#2d5a3d">Vytvořit reporty</button></div></div>';
+ vc.hidden=false;vc.scrollTop=0;const ms=document.getElementById('mrm');ms.value=per;ms.onchange=draw;draw();
+ const cbs=()=>[...vc.querySelectorAll('#mrp input')];
+ const kk=document.getElementById('mrkk');if(kk){kk.oninput=mrKPrev;document.getElementById('mrkt').onchange=mrKPrev;document.getElementById('mrp').addEventListener('change',mrKPrev)}
+ document.getElementById('mrall').onclick=()=>cbs().forEach(c=>c.checked=true);document.getElementById('mrnone').onclick=()=>cbs().forEach(c=>c.checked=false);
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};
+ const go=()=>{const p=new Set(cbs().filter(c=>c.checked).map(c=>c.value)),r=new Set([...vc.querySelectorAll('#mrr input')].filter(c=>c.checked).map(c=>c.value));
+  const miss=mrDays(ms.value).filter(d=>!DATA.days[d].pd);
+  if(miss.length){alert('Pro některé dny vybraného období chybí údaje o DPH z účtů – reporty nelze spočítat přesně. Je potřeba znovu zpracovat export z pokladny.');return}
+  if(!p.size){alert('Vyberte alespoň jeden typ platby.');return}if(!r.size){alert('Vyberte alespoň jeden report.');return}
+  let k=1,kt=new Set();if(window.OR_ADMIN&&KOEF&&document.getElementById('mrkk')){k=parseFloat(String(document.getElementById('mrkk').value).replace(',','.'));if(!(k>=0)){alert('Zadejte platný koeficient (např. 0,8).');return}kt=new Set([...vc.querySelectorAll('#mrkt input')].filter(c=>c.checked).map(c=>c.value))}
+  mrCfg={m:ms.value,p,r,x:new Set(cbs().filter(c=>!c.checked).map(c=>c.value)),k,kt};buildMr()};
+ document.getElementById('mrgo').onclick=go;document.getElementById('mrgo2').onclick=go}
+function mrKPrev(){const el=document.getElementById('mrkp');if(!el)return;
+ const k=parseFloat(String(document.getElementById('mrkk').value).replace(',','.')),vc=document.getElementById('vc');
+ if(!(k>=0)){el.innerHTML='<span style="color:#c0392b">Zadejte platný koeficient (např. 0,8).</span>';return}
+ const KT=new Set([...vc.querySelectorAll('#mrkt input')].filter(c=>c.checked).map(c=>c.value)),P=new Set([...vc.querySelectorAll('#mrp input')].filter(c=>c.checked).map(c=>c.value)),ds=mrDays(document.getElementById('mrm').value),H=v=>Math.round(v*100);
+ const z={},n={};let Z=[0,0,0],N=[0,0,0];
+ for(const d of ds){const o=payRates(DATA.days[d])||{};for(const t in o){if(!P.has(t))continue;const kk=KT.has(t)?k:1;for(const s in o[t]){const g=H(o[t][s][0]),x=H(o[t][s][1]),g2=H(o[t][s][0]*kk),x2=H(o[t][s][1]*kk);
+  Z[0]+=g;Z[1]+=g-x;Z[2]+=x;N[0]+=g2;N[1]+=g2-x2;N[2]+=x2;if(KT.has(t)){const a=z[t]=z[t]||[0,0,0],b=n[t]=n[t]||[0,0,0];a[0]+=g;a[1]+=g-x;a[2]+=x;b[0]+=g2;b[1]+=g2-x2;b[2]+=x2}}}}
+ const f=v=>m2(v/100),row=(l,a,b)=>`<tr><td>${l}</td><td>${f(a[0])}</td><td><b>${f(b[0])}</b></td><td>${f(a[1])} → <b>${f(b[1])}</b></td><td>${f(a[2])} → <b>${f(b[2])}</b></td></tr>`;
+ const T=Object.keys(z);
+ el.innerHTML=!T.length?'<span class="mu">Není vybraný žádný typ platby k přepočtu.</span>':
+  '<table class="mrtb" style="font-size:13px"><thead><tr><th>Výsledek</th><th>Tržba nyní</th><th>Tržba po přepočtu</th><th>Daň. základ</th><th>DPH</th></tr></thead>'+T.map(t=>row(esc(t),z[t],n[t])).join('')+row('<b>CELKEM (vybrané platby)</b>',Z,N)+'</table>'+
+  (k!==1?`<div class="mu">Rozdíl tržby: <b>${f(N[0]-Z[0])} Kč</b></div>`:'')}
+function buildMr(){
+ const {m,p,r}=mrCfg,ds=mrDays(m),H=v=>Math.round(v*100);// výpočty v haléřích, bez zaokrouhlovacích chyb
+ const K=window.OR_ADMIN&&KOEF&&mrCfg.k!=null?mrCfg.k:1,KT=mrCfg.kt||new Set();// koeficient správce pro vybrané typy plateb (Hotově)
+ const D=ds.map(d=>{const o=payRates(DATA.days[d]),R={};for(const t in o){if(!p.has(t))continue;const kk=KT.has(t)?K:1;for(const s in o[t]){const g=H(o[t][s][0]*kk),x=H(o[t][s][1]*kk);if(!g&&!x)continue;(R[t]=R[t]||{})[s]=[g,x]}}return [d,R]});
+ const T=[...p].filter(t=>D.some(([,R])=>R[t])),RT={},RS={},add=(o,s,v)=>{const a=o[s]=o[s]||[0,0];a[0]+=v[0];a[1]+=v[1]};
+ D.forEach(([,R])=>{for(const t in R)for(const s in R[t]){add(RT[t]=RT[t]||{},s,R[t][s]);add(RS,s,R[t][s])}});
+ const sum3=o=>{let a=0,x=0;for(const s in o){a+=o[s][0];x+=o[s][1]}return [a,a-x,x]};
+ T.sort((a,b)=>sum3(RT[b])[0]-sum3(RT[a])[0]);
+ const sk=s=>s==='x'?999:+s,SZ=o=>Object.keys(o).sort((a,b)=>sk(a)-sk(b)),sn=s=>s==='x'?'bez položek':s+' %',c3=x=>x.map(v=>`<td>${m2(v/100)}</td>`).join('');
+ const now=new Date(),od=ds.length?fd2(ds[0]):'–',do_=ds.length?fd2(ds.at(-1)):'–',nm=esc(document.querySelector('h1').textContent);
+ const hd=t=>`<div class="mrh"><div class="mrt">${t}</div><div class="mrg"><div><b>${nm}</b><br>Od: ${od}<br>Do: ${do_}</div><div>Měna: <b>CZK</b></div><div style="text-align:right">${now.toLocaleDateString('cs-CZ')}<br>${now.toLocaleTimeString('cs-CZ')}</div></div></div>`;
+ const pages=[],tot=sum3(RS);
+ if(r.has('p'))pages.push(hd('Tržby po platbách')+'<table class="mrtb"><thead><tr><th>Druh platby</th><th>Tržba</th><th>Daň. základ</th><th>DPH</th></tr></thead>'+
+  T.map(t=>`<tr><td>${esc(t)}</td>${c3(sum3(RT[t]))}</tr>`).join('')+`<tr class="mrc"><td>CELKEM</td>${c3(tot)}</tr></table>`);
+ if(r.has('d'))pages.push(hd('Tržby po DPH')+'<table class="mrtb t2"><thead><tr><th>Druh platby</th><th>Sazba DPH</th><th>Tržba</th><th>Daň. základ</th><th>DPH</th></tr></thead>'+
+  T.map(t=>SZ(RT[t]).map((s,i)=>`<tr><td>${i?'':esc(t)}</td><td>${sn(s)}</td>${c3(sum3({[s]:RT[t][s]}))}</tr>`).join('')+`<tr class="mrs"><td>Celkem ${esc(t)}</td><td></td>${c3(sum3(RT[t]))}</tr>`).join('')+
+  '<tr class="mrsp"><td colspan="5"></td></tr>'+SZ(RS).map(s=>`<tr class="mrs"><td>Celkem sazba</td><td>${sn(s)}</td>${c3(sum3({[s]:RS[s]}))}</tr>`).join('')+`<tr class="mrc"><td>CELKEM</td><td></td>${c3(tot)}</tr></table>`);
+ if(r.has('u'))pages.push(hd('Tržby po dnech')+'<table class="mrtb t2"><thead><tr><th>Den</th><th>Sazba DPH / druh platby</th><th>Tržba</th><th>Daň. základ</th><th>DPH</th></tr></thead>'+
+  D.filter(([,R])=>Object.keys(R).length).map(([d,R])=>{const rows=[],dd={};T.forEach(t=>{if(R[t])SZ(R[t]).forEach(s=>{rows.push(`<tr><td>${fd2(d)}</td><td>${sn(s)} ${esc(t)}</td>${c3(sum3({[s]:R[t][s]}))}</tr>`);add(dd,s,R[t][s])})});
+   return rows.join('')+`<tr class="mrs"><td colspan="2">Celkem za den ${fd2(d)}</td>${c3(sum3(dd))}</tr>`}).join('')+`<tr class="mrc"><td colspan="2">CELKEM TRŽBA</td>${c3(tot)}</tr></table>`);
+ const vc=document.getElementById('vc');
+ vc.innerHTML='<div class="acts"><button class="btn" id="vcp">Vytisknout / uložit do PDF</button><button class="btn" id="mrmail" title="Odešle PDF s reporty e-mailem přes onlinereport.cz">Odeslat e-mailem</button><button class="btn" id="mrbk">← Změnit výběr</button><button class="btn" id="vcx">Zavřít</button></div><div class="acts" id="mrmn" hidden style="background:#fff;color:#111;border-radius:8px;padding:10px 12px;font-size:14px"></div>'+
+  pages.map((h,i)=>`<div class="doc mrp">${h}<div class="mu mrft">Zdroj: Data z Vašeho pokladního systému FoodMan · strana ${i+1}/${pages.length}</div></div>`).join('');
+ vc.hidden=false;vc.scrollTop=0;
+ document.getElementById('vcx').onclick=()=>{vc.hidden=true};document.getElementById('mrbk').onclick=openMr;document.getElementById('mrmail').onclick=()=>mrMail();document.getElementById('vcp').onclick=()=>pr(false,true)}
+// ---------- Měsíční reporty: odeslání e-mailem (PDF vytvořené v prohlížeči; sdílení souboru, jinak stažení + nový e-mail) ----------
+function ldJs(u){return new Promise((ok,ko)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=()=>ko(new Error('Nepodařilo se načíst '+u));document.head.appendChild(s)})}
+async function mrPdf(sel,orient){sel=sel||'#vc .doc.mrp';orient=orient||'portrait';const ELS=typeof sel==='string'?document.querySelectorAll(sel):sel;
+ if(!window.html2canvas)await ldJs('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+ if(!(window.jspdf&&window.jspdf.jsPDF))await ldJs('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+ const L=orient==='landscape',pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',orientation:orient,compress:true}),M=10,W=(L?297:210)-2*M,Hm=(L?210:297)-2*M;let first=true;
+ for(const el of ELS){
+  const wide=[...el.querySelectorAll('.dw')].some(x=>x.scrollWidth>x.clientWidth+2);if(wide)el.classList.add('pdfcap');let c,br=[];// široká tabulka (report po dnech) celá, jinak stejně jako na obrazovce
+  try{const top=el.getBoundingClientRect().top;br=[...el.querySelectorAll('tr,.mrh,.mrft,h1,h2,p,.mu')].map(x=>x.getBoundingClientRect().bottom-top);// možné konce stránek (pod řádkem tabulky)
+   c=await html2canvas(el,{scale:1.8,backgroundColor:'#ffffff',windowWidth:Math.max(el.scrollWidth+80,1200),
+    onclone:d=>{const st=d.createElement('style');st.textContent='*{font-variant-numeric:normal!important;font-feature-settings:normal!important}';d.head.appendChild(st);const w=d.createTreeWalker(d.body,NodeFilter.SHOW_TEXT);let t;while(t=w.nextNode())if(/[\u00a0\u202f]/.test(t.nodeValue))t.nodeValue=t.nodeValue.replace(/[\u00a0\u202f]/g,' ')}})}// html2canvas špatně měří nezlomitelné mezery v číslech (1 234,00)
+  finally{el.classList.remove('pdfcap')}
+  const pxPerMm=c.width/W,ph=Math.floor(Hm*pxPerMm),k=c.height/Math.max(el.offsetHeight,1),B=br.map(v=>Math.round(v*k)).sort((a,b)=>a-b);
+  for(let y=0;y<c.height-2;){let e=Math.min(y+ph,c.height);if(e<c.height){const b=B.filter(v=>v>y+ph*0.3&&v<=e).pop();if(b)e=b}
+   const h=e-y,p=document.createElement('canvas');p.width=c.width;p.height=h;p.getContext('2d').drawImage(c,0,y,c.width,h,0,0,c.width,h);
+   if(!first)pdf.addPage();first=false;pdf.addImage(p.toDataURL('image/jpeg',0.92),'JPEG',M,M,W,h/pxPerMm);y=e}}
+ return pdf.output('blob')}
+function mrMailInfo(){const nm=document.querySelector('h1').textContent.trim(),ds=mrDays(mrCfg.m),per=ds.length?(fd2(ds[0])+' – '+fd2(ds.at(-1))):'',
+  fn=('Mesicni reporty '+nm+' '+(ds.length?ds[0]+'-'+ds.at(-1):'')).normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^\w.-]+/g,'_')+'.pdf',
+  subj='Měsíční reporty – '+nm+(per?', '+per:'');
+ let txt='Dobrý den,\n\nv příloze posílám měsíční reporty '+nm+(per?' za období '+per:'')+'.\n';
+ const t=document.querySelector('#vc .doc.mrp table.mrtb');if(mrCfg.r.has('p')&&t){txt+='\nTržby po platbách:\n'+[...t.querySelectorAll('tr')].slice(1).map(r=>{const c=[...r.cells].map(x=>x.textContent.trim());return c[0]+': '+c[1]+' Kč'}).join('\n')+'\n'}
+ const asc=x=>x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.-]+/g,'_');
+ const mr=d=>d.slice(4,6)+d.slice(0,4),obd=ds.length?(mr(ds[0])===mr(ds.at(-1))?mr(ds[0]):mr(ds[0])+'-'+mr(ds.at(-1))):'';// např. 102026 = říjen 2026
+ const parts=[...document.querySelectorAll('#vc .doc.mrp')].map(el=>({el,fn:((el.querySelector('.mrt')?el.querySelector('.mrt').textContent.trim():'Report')+(obd?' '+obd:'')).replace(/[\\\/:*?"<>|]+/g,'-')+'.pdf'}));
+ return {fn,subj,txt,parts}}
+const LSK='mrMailTo';function lsGet(){try{return localStorage.getItem(LSK)||''}catch(e){return''}}function lsSet(v){try{localStorage.setItem(LSK,v)}catch(e){}}
+function mrMail(I,sel,orient){// formulář pro odeslání přes server onlinereport.cz (posta.php); I = {fn, subj, txt}
+ I=I||mrMailInfo();const box=document.getElementById('mrmn');box.hidden=false;
+ box.innerHTML=`<div style="display:grid;gap:6px;width:100%"><b>Odeslat ${esc(I.co||'reporty')} e-mailem (PDF v příloze)</b>
+  <label>Komu <input id="mmto" type="text" style="width:100%" placeholder="adresa@firma.cz, další@firma.cz" value="${esc(lsGet())}"></label>
+  <label>Předmět <input id="mmsu" type="text" style="width:100%" value="${esc(I.subj)}"></label>
+  <label>Zpráva <textarea id="mmtx" rows="7" style="width:100%;font:inherit">${esc(I.txt)}</textarea></label>
+  <div class="f"><button class="btn" id="mmgo" style="background:#2d5a3d;color:#fff;border-color:#2d5a3d">Odeslat</button><button class="btn" id="mmx">Zrušit</button><span id="mmst"></span></div></div>`;
+ document.getElementById('mmto').focus();
+ document.getElementById('mmx').onclick=()=>{box.hidden=true;box.innerHTML=''};
+ document.getElementById('mmgo').onclick=async e=>{const b=e.currentTarget,st=document.getElementById('mmst'),to=document.getElementById('mmto').value.trim();
+  if(!/^[^@\s,;]+@[^@\s,;]+\.[^@\s,;]+([\s,;]+[^@\s,;]+@[^@\s,;]+\.[^@\s,;]+)*$/.test(to)){st.textContent='Zadejte platnou e-mailovou adresu (více adres oddělte čárkou).';return}
+  b.disabled=true;st.textContent='Připravuji PDF…';
+  try{const enc=new TextEncoder(),tx=enc.encode(document.getElementById('mmtx').value),hx=(n,l)=>n.toString(16).padStart(l,'0');
+   const send=async parts=>{let B=[enc.encode('ORTX'+hx(tx.length,8)),tx];
+     if(parts.length>1){B.push(enc.encode('ORMP'+hx(parts.length,4)));for(const p of parts){const nm=enc.encode(p.fn);B.push(enc.encode(hx(nm.length,4)),nm,enc.encode(hx(p.pdf.length,8)),p.pdf)}}
+     else B.push(parts[0].pdf);
+     let body=new Blob(B);if(window.CompressionStream)body=await new Response(body.stream().pipeThrough(new CompressionStream('gzip'))).blob();
+     st.textContent='Odesílám…';
+     const q='?to='+encodeURIComponent(to)+'&subj='+encodeURIComponent(document.getElementById('mmsu').value)+'&fn='+encodeURIComponent(parts.length>1?I.fn:parts[0].fn);
+     const r=await fetch('posta.php'+q,{method:'POST',body,credentials:'same-origin',headers:{'Content-Type':'application/octet-stream','X-Requested-With':'onlinereport'}});
+     let j=null;try{j=await r.json()}catch(_){}return {r,j}};
+   let parts;
+   if(I.parts&&I.parts.length>1){parts=[];for(const [i,p] of I.parts.entries()){st.textContent='Připravuji PDF '+(i+1)+'/'+I.parts.length+'…';parts.push({fn:p.fn,pdf:new Uint8Array(await (await mrPdf([p.el],orient)).arrayBuffer())})}}
+   else parts=[{fn:I.parts&&I.parts[0]?I.parts[0].fn:I.fn,pdf:new Uint8Array(await (await mrPdf(sel,orient)).arrayBuffer())}];
+   let {r,j}=await send(parts),pozn='';
+   if(!(r.ok&&j&&j.ok)&&parts.length>1&&j&&/není PDF/.test(j.error||'')){// starší posta.php na serveru umí jen jednu přílohu – poslat jedno spojené PDF
+     st.textContent='Připravuji PDF…';({r,j}=await send([{fn:I.fn,pdf:new Uint8Array(await (await mrPdf(sel,orient)).arrayBuffer())}]));pozn=' (jako jedno PDF – pro samostatné soubory nahrajte na web novou posta.php)'}
+   if(r.ok&&j&&j.ok){lsSet(to);box.innerHTML='<b>✓ E-mail s '+(parts.length>1&&!pozn?parts.length+' PDF':'PDF')+' byl odeslán na '+esc(j.to.join(', '))+'.</b>'+esc(pozn);return}
+   throw new Error(j&&j.error||('server odpověděl '+r.status))}
+  catch(err){b.disabled=false;st.innerHTML='<span style="color:#c0392b">Odeslání se nezdařilo: '+esc(err.message||String(err))+'</span> <a href="#" id="mmfb">Stáhnout PDF a otevřít e-mail</a>';
+   document.getElementById('mmfb').onclick=ev=>{ev.preventDefault();mrMailto(I,sel,orient)}}}}
+async function mrMailto(I,sel,orient){// záložní cesta: stáhnout PDF (každý report zvlášť) + výchozí poštovní program (bez automatické přílohy)
+ const P=I.parts&&I.parts.length?I.parts:[{el:null,fn:I.fn}];
+ for(const p of P){const blob=await mrPdf(p.el?[p.el]:sel,orient),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=p.fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000)}
+ setTimeout(()=>{location.href='mailto:?subject='+encodeURIComponent(I.subj)+'&body='+encodeURIComponent(I.txt+'\n(Přiložte PDF ze složky Stažené soubory: '+P.map(p=>p.fn).join(', ')+')')},400)}
+if(MESICNI){const b=document.getElementById('mrb');b.hidden=false;b.onclick=openMr}
+
+render();
+// když se hodnota nevejde do dlaždice na jeden řádek, zmenší se písmo
+function fitKv(){document.querySelectorAll('#kpi .kv,#obv .kv,#skpi .kv').forEach(e=>{const b=+e.dataset.fs||(e.dataset.fs=parseFloat(getComputedStyle(e).fontSize));let f=b;e.style.fontSize=f+'px';while(e.scrollWidth>e.clientWidth+1&&f>10){f-=1;e.style.fontSize=f+'px'}})}
+{let t;const mo=new MutationObserver(()=>{cancelAnimationFrame(t);t=requestAnimationFrame(fitKv)});['kpi','obv','skpi'].forEach(i=>{const e=document.getElementById(i);if(e)mo.observe(e,{childList:true})});window.addEventListener('resize',()=>{cancelAnimationFrame(t);t=requestAnimationFrame(fitKv)});window.addEventListener('beforeprint',fitKv);if(document.fonts)document.fonts.ready.then(fitKv);fitKv()}
+</script></body></html>
